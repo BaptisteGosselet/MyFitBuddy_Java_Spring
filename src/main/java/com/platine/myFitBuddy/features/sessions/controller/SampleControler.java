@@ -1,7 +1,6 @@
-package com.platine.myFitBuddy.controller;
+package com.platine.myFitBuddy.features.sessions.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,15 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.platine.myFitBuddy.model.Sample;
-import com.platine.myFitBuddy.repository.SampleRepository;
+import com.platine.myFitBuddy.features.sessions.model.Sample;
+import com.platine.myFitBuddy.features.sessions.repository.SampleRepository;
 
 @RestController
 @RequestMapping("/sample")
 public class SampleControler {
     
     @Autowired
-    SampleRepository sampleRepository;
+    //TODO : controller minimaliste, faire un service ensuite
+    private SampleRepository sampleRepository;
+    
 
     /**
      * Get all samples
