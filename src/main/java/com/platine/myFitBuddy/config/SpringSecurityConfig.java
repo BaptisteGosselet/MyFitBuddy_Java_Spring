@@ -29,6 +29,7 @@ public class SpringSecurityConfig {
         .authorizeHttpRequests(auth -> {
             auth.requestMatchers("/users/register").permitAll();
             auth.requestMatchers("/users/all").hasRole("ADMIN");
+            auth.requestMatchers("/sessions/all").hasRole("ADMIN");
             auth.anyRequest().authenticated();  
         })
         .formLogin(Customizer.withDefaults()) // page de login de base de security
