@@ -24,16 +24,9 @@ public class SessionControllerImpl implements SessionController {
     private final SessionServiceImpl sessionService;
     private final DBUserServiceImpl dbUserService;
 
-    //TODO : duplication de code avec DBUserController (probablement déplacer dans userservice)
-    public DBUser getCurrentDBUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        DBUser currentUser = (DBUser) authentication.getPrincipal();
-        return currentUser;
-    }
-
     @Override
     public ResponseEntity<Session> findById(final long sessionId) {
-        DBUser user = getCurrentDBUser();
+        DBUser user = dbUserService.getCurrentUser();
         Optional<Session> sessionOptional = sessionService.findById(sessionId, user);
         if (!sessionOptional.isPresent()){
             return ResponseEntity.notFound().build();
@@ -43,14 +36,14 @@ public class SessionControllerImpl implements SessionController {
 
     @Override
     public ResponseEntity<List<Session>> findByUser() {
-        DBUser user = getCurrentDBUser();
+        DBUser user = dbUserService.getCurrentUser();
         List<Session> sessionsList = sessionService.findByUserId(user);
         return ResponseEntity.ok(sessionsList);
     }
 
     @Override
     public ResponseEntity<Session> create(final SessionCreateForm createForm) {
-        DBUser user = getCurrentDBUser();
+        DBUser user = dbUserService.getCurrentUser();
         Session createdSession = sessionService.create(createForm, user);
         return ResponseEntity.ok(createdSession);
     }

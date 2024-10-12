@@ -24,15 +24,12 @@ public class AuthenticationController {
 
     @PostMapping("/signup")
     public ResponseEntity<DBUser> register(@RequestBody DBUserRegisterForm registerUserDto) {
-        System.out.println("signup");
         DBUser registeredUser = authenticationService.signup(registerUserDto);
-
         return ResponseEntity.ok(registeredUser);
     }
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody DBUserLoginForm loginUserDto) {
-        System.out.println("login");
         DBUser authenticatedUser = authenticationService.authenticate(loginUserDto);
 
         String jwtToken = jwtService.generateToken(authenticatedUser);

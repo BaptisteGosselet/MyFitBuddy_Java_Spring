@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface DBUserService {
 
+    public DBUser getCurrentUser();
+
     public List<DBUser> getAllUsers();
     
 }
