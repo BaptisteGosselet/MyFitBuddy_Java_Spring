@@ -23,12 +23,11 @@ public class AuthenticationController {
   private final AuthenticationService authenticationService;
   private final DBUserService userService;
 
-  @PostMapping("/signup")
-  public ResponseEntity<DBUser> register(
-    @RequestBody DBUserRegisterForm registerUserDto
-  ) {
-    DBUser registeredUser = authenticationService.signup(registerUserDto);
-    return ResponseEntity.ok(registeredUser);
+  @PostMapping("/register")
+  public ResponseEntity<String> register(@RequestBody DBUserRegisterForm registerForm) {
+    System.out.println(registerForm.getUsername() + registerForm.getPassword());
+    authenticationService.signup(registerForm);
+    return ResponseEntity.ok("User registered successfully.");
   }
 
   @PostMapping("/login")
