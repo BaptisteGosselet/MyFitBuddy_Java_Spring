@@ -26,3 +26,17 @@ Il est possible de s'authentifier avec les identifiants `dbuser:dbuser` ou `admi
 ```sh
 docker-compose down
 ```
+
+## Prettier
+
+Pour vérifier le formattage du code : 
+
+```sh
+mvn prettier:check
+``` 
+
+Pour réecrire le formattage : 
+
+```sh
+mvn prettier:write
+``` 
