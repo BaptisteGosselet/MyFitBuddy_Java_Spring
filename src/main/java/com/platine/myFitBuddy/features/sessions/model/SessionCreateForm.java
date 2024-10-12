@@ -8,5 +8,5 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class SessionCreateForm {
-    private String name;
+  private String name;
 }

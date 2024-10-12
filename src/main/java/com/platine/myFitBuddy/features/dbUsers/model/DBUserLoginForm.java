@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DBUserLoginForm {
-    String username;
-    String password;
+  String username;
+  String password;
 }

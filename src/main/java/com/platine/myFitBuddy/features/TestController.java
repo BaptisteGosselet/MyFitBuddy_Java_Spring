@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/test")
 public class TestController {
-    
-    @GetMapping()
-    public String test(){
-        return "myFitBuddy API : ok";
-    }
 
+  @GetMapping
+  public String test() {
+    return "myFitBuddy API : ok";
+  }
 }
