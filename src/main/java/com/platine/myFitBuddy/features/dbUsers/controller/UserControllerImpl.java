@@ -9,8 +9,8 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,19 +19,11 @@ public class UserControllerImpl implements UserController {
 
     private DBUserServiceImpl dbUserServiceImpl;
 
-    @Override
-    public ResponseEntity<DBUser> register(@RequestBody DBUserRegisterForm form) {
-        return ResponseEntity.ok(dbUserServiceImpl.register(form));
-    }
-
-    @Override
-    public ResponseEntity<DBUser> getCurrentUser(@AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.ok(dbUserServiceImpl.getCurrentDBUser());
-    }
-
-    @Override
-    public ResponseEntity<DBUser> deleteUser(@AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.ok(dbUserServiceImpl.deleteUser());
+    public ResponseEntity<DBUser> getCurrentUser() {
+        System.out.println("Get current User");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        DBUser currentUser = (DBUser) authentication.getPrincipal();
+        return ResponseEntity.ok(currentUser);
     }
 
     @Override
