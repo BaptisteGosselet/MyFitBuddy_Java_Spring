@@ -1,0 +1,79 @@
+Source : https://www.fitadium.com/conseils/entrainement/exercices-musculation/
+
+1. Exercices pour les pectoraux (poitrine)
+
+- Développé couché / Bench Press / BENCH_PRESS
+- Développé incliné / Incline Bench Press / INCLINE_BENCH_PRESS
+- Développé décliné / Decline Bench Press / DECLINE_BENCH_PRESS
+- Écartés couchés / Dumbbell Flyes / DUMBBELL_FLYES
+- Écartés à la machine / Machine Flyes / MACHINE_FLYES
+- Dips (poitrine) / Chest Dips / CHEST_DIPS
+- Pec deck (butterfly) / Pec Deck Fly / PEC_DECK_FLY
+- Pompes / Push-ups / PUSH_UPS
+
+2. Exercices pour les dorsaux (dos)
+- Tractions / Pull-ups / PULL_UPS
+- Rowing barre / Barbell Row / BARBELL_ROW
+- Rowing haltères / Dumbbell Row / DUMBBELL_ROW
+- Rowing machine / Machine Row / MACHINE_ROW
+- Tirage horizontal / Seated Cable Row / SEATED_CABLE_ROW
+- Tirage vertical / Lat Pulldown / LAT_PULLDOWN
+- Soulevé de terre / Deadlift / DEADLIFT
+- Pull-over / Pull-over / PULL_OVER
+- Superman / Superman / SUPERMAN
+
+3. Exercices pour les jambes
+
+a. Quadriceps
+- Squat / Squat / SQUAT
+- Presse à cuisses / Leg Press / LEG_PRESS
+- Fentes / Lunges / LUNGES
+- Leg extension / Leg Extension / LEG_EXTENSION
+- Hack squat / Hack Squat / HACK_SQUAT
+
+b. Ischio-jambiers
+- Leg curl / Leg Curl / LEG_CURL
+- Soulevé de terre jambes tendues / Stiff-Legged Deadlift / STIFF_LEGGED_DEADLIFT
+- Good morning / Good Morning / GOOD_MORNING
+
+c. Mollets
+- Élévation des mollets debout / Standing Calf Raise / STANDING_CALF_RAISE
+- Élévation des mollets assis / Seated Calf Raise / SEATED_CALF_RAISE
+
+4. Exercices pour les épaules
+
+- Développé militaire / Military Press / MILITARY_PRESS
+- Développé Arnold / Arnold Press / ARNOLD_PRESS
+- Élévations latérales / Lateral Raise / LATERAL_RAISE
+- Élévations frontales / Front Raise / FRONT_RAISE
+- Oiseau (élévations arrière) / Rear Delt Fly / REAR_DELT_FLY
+- Face-pull / Face Pull / FACE_PULL
+
+5. Exercices pour les bras
+
+a. Biceps
+- Curl barre / Barbell Curl / BARBELL_CURL
+- Curl haltères / Dumbbell Curl / DUMBBELL_CURL
+- Curl incliné / Incline Dumbbell Curl / INCLINE_DUMBBELL_CURL
+- Curl concentré / Concentration Curl / CONCENTRATION_CURL
+- Curl marteau / Hammer Curl / HAMMER_CURL
+- Curl à la poulie / Cable Curl / CABLE_CURL
+
+b. Triceps
+- Développé couché prise serrée / Close-Grip Bench Press / CLOSE_GRIP_BENCH_PRESS
+- Extensions triceps barre / Barbell Triceps Extension / BARBELL_TRICEPS_EXTENSION
+- Extensions triceps haltères / Dumbbell Triceps Extension / DUMBBELL_TRICEPS_EXTENSION
+- Dips (triceps) / Triceps Dips / TRICEPS_DIPS
+- Extensions à la poulie / Cable Triceps Extension / CABLE_TRICEPS_EXTENSION
+- Barre au front / Skull Crusher / SKULL_CRUSHER
+
+6. Exercices pour les abdominaux
+
+- Crunchs / Crunches / CRUNCHES
+- Relevé de jambes / Leg Raises / LEG_RAISES
+- Planche / Plank / PLANK
+- Russian twist / Russian Twist / RUSSIAN_TWIST
+- Mountain climbers / Mountain Climbers / MOUNTAIN_CLIMBERS
+- V-ups / V-ups / V_UPS
+- Gainage latéral / Side Plank / SIDE_PLANK
+- Roues abdominales / Ab Wheel Rollout / AB_WHEEL_ROLLOUT
