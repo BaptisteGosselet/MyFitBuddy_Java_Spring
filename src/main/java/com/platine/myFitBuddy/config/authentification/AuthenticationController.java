@@ -4,6 +4,7 @@ import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUserLoginForm;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUserRegisterForm;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,15 +24,16 @@ public class AuthenticationController {
   private final DBUserService userService;
 
   @PostMapping("/signup")
-  public ResponseEntity<String> register(@RequestBody DBUserRegisterForm registerForm) {
-    System.out.println(registerForm.getUsername() + registerForm.getPassword());
+  public ResponseEntity<String> register(
+    @Valid @RequestBody DBUserRegisterForm registerForm
+  ) {
     authenticationService.signup(registerForm);
     return ResponseEntity.ok("User registered successfully.");
   }
 
   @PostMapping("/signin")
   public ResponseEntity<JwtResponse> authenticate(
-    @RequestBody DBUserLoginForm loginForm
+    @Valid @RequestBody DBUserLoginForm loginForm
   ) {
     DBUser authenticatedUser = authenticationService.authenticate(loginForm);
 
