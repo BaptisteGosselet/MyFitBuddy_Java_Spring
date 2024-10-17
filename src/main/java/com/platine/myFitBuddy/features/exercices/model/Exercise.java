@@ -9,20 +9,18 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Exercise {
-    
-    public Exercise(String key){
-        this.key = key;
-    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  public Exercise(String key) {
+    this.key = key;
+  }
 
-    @NotBlank
-    @Column(unique = true)
-    private String key;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    //Image
-
+  @NotBlank
+  @Column(unique = true)
+  private String key;
+  //Image
 
 }
