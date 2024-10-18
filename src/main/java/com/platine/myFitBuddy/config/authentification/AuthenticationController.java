@@ -54,7 +54,14 @@ public class AuthenticationController {
       UserDetails userDetails = userService.getCurrentUser();
       if (jwtService.isTokenValid(refreshToken, userDetails)) {
         String newAccessToken = jwtService.generateToken(userDetails);
-        return ResponseEntity.ok(new JwtResponse(newAccessToken, refreshToken));
+        return ResponseEntity.ok(
+          new JwtResponse(
+            newAccessToken,
+            jwtService.getAccessExpirationTime(),
+            refreshToken,
+            jwtService.getRefreshExpirationTime()
+          )
+        );
       }
     }
     return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid refresh token");

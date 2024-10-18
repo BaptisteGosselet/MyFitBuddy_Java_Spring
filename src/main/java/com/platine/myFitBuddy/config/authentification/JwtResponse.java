@@ -8,15 +8,23 @@ import lombok.Setter;
 public class JwtResponse {
   private String accessToken;
   private String refreshToken;
-  private long expiresIn;
+  private long accessExpiresIn;
+  private long refreshExpiresIn;
 
-  public JwtResponse(String accessToken, long expiresIn) {
+  public JwtResponse(String accessToken, long accessExpiresIn) {
     this.accessToken = accessToken;
-    this.expiresIn = expiresIn;
+    this.accessExpiresIn = accessExpiresIn;
   }
 
-  public JwtResponse(String accessToken, String refreshToken) {
+  public JwtResponse(
+    String accessToken,
+    long accessExpiresIn,
+    String refreshToken,
+    long refreshExpiresIn
+  ) {
     this.accessToken = accessToken;
+    this.accessExpiresIn = accessExpiresIn;
     this.refreshToken = refreshToken;
+    this.refreshExpiresIn = refreshExpiresIn;
   }
 }
