@@ -117,6 +117,26 @@ public class GlobalExceptionHandler {
       return errorDetail;
     }
 
+    if (exception instanceof UsernameAlreadyExistsException) {
+      errorDetail =
+        ProblemDetail.forStatusAndDetail(
+          HttpStatusCode.valueOf(409),
+          exception.getMessage()
+        );
+      errorDetail.setProperty("description", exception.getMessage());
+      return errorDetail;
+    }
+
+    if (exception instanceof EmailAlreadyExistsException) {
+      errorDetail =
+        ProblemDetail.forStatusAndDetail(
+          HttpStatusCode.valueOf(409),
+          exception.getMessage()
+        );
+      errorDetail.setProperty("description", exception.getMessage());
+      return errorDetail;
+    }
+
     if (errorDetail == null) {
       errorDetail =
         ProblemDetail.forStatusAndDetail(
