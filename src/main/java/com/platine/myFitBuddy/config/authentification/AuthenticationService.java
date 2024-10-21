@@ -6,6 +6,7 @@ import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUserLoginForm;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUserRegisterForm;
 import com.platine.myFitBuddy.features.dbUsers.repository.DBUserRepository;
+import com.platine.myFitBuddy.utils.MyUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,29 +26,34 @@ public class AuthenticationService {
   @Autowired
   private final AuthenticationManager authenticationManager;
 
-  public DBUser signup(DBUserRegisterForm form) {
-    if (userRepository.findByUsername(form.getUsername()).isPresent()) {
+  public DBUser signup(final DBUserRegisterForm form) {
+    String formalUsername = MyUtils.normalize(form.getUsername());
+    String formalEmail = MyUtils.normalize(form.getEmail());
+
+    if (userRepository.findByUsername(formalUsername).isPresent()) {
       throw new UsernameAlreadyExistsException(
-        "Username already exists: " + form.getUsername()
+        "Username already exists: " + formalUsername
       );
     }
 
-    if (userRepository.findByEmail(form.getEmail()).isPresent()) {
-      throw new EmailAlreadyExistsException("Email already exists: " + form.getEmail());
+    if (userRepository.findByEmail(formalEmail).isPresent()) {
+      throw new EmailAlreadyExistsException("Email already exists: " + formalEmail);
     }
 
     DBUser user = new DBUser(
-      form.getUsername(),
-      form.getEmail(),
+      formalUsername,
+      formalEmail,
       passwordEncoder.encode(form.getPassword()),
       "USER"
     );
     return userRepository.save(user);
   }
 
-  public DBUser authenticate(DBUserLoginForm form) {
+  public DBUser authenticate(final DBUserLoginForm form) {
+    String formalUsernameOrEmail = MyUtils.normalize(form.getUsernameOrEmail());
+
     DBUser wantedUser = userRepository
-      .findByUsernameOrEmail(form.getUsernameOrEmail())
+      .findByUsernameOrEmail(formalUsernameOrEmail)
       .orElseThrow();
 
     authenticationManager.authenticate(
