@@ -44,13 +44,11 @@ public class SessionServiceImpl implements SessionService {
 
   @Override
   public Session update(SessionUpdateForm updateForm, final DBUser user) {
-    // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'update'");
   }
 
   @Override
   public Session delete(long sessionId, final DBUser user) {
-    // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'delete'");
   }
 
