@@ -25,7 +25,7 @@ public class AuthenticationController {
 
   @PostMapping("/signup")
   public ResponseEntity<String> register(
-    @Valid @RequestBody DBUserRegisterForm registerForm
+    @Valid @RequestBody final DBUserRegisterForm registerForm
   ) {
     authenticationService.signup(registerForm);
     return ResponseEntity.ok("User registered successfully.");
@@ -33,7 +33,7 @@ public class AuthenticationController {
 
   @PostMapping("/signin")
   public ResponseEntity<JwtResponse> authenticate(
-    @Valid @RequestBody DBUserLoginForm loginForm
+    @Valid @RequestBody final DBUserLoginForm loginForm
   ) {
     DBUser authenticatedUser = authenticationService.authenticate(loginForm);
 
@@ -48,7 +48,9 @@ public class AuthenticationController {
   }
 
   @PostMapping("/refresh-token")
-  public ResponseEntity<?> refreshToken(@RequestHeader("Authorization") String token) {
+  public ResponseEntity<?> refreshToken(
+    @RequestHeader("Authorization") final String token
+  ) {
     if (token != null && token.startsWith("Bearer ")) {
       String refreshToken = token.substring(7);
       UserDetails userDetails = userService.getCurrentUser();
