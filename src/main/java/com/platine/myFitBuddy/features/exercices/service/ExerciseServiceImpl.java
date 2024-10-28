@@ -1,7 +1,9 @@
 package com.platine.myFitBuddy.features.exercices.service;
 
 import com.platine.myFitBuddy.features.exercices.model.Exercise;
+import com.platine.myFitBuddy.features.exercices.model.MuscleGroup;
 import com.platine.myFitBuddy.features.exercices.repository.ExerciseRepository;
+import com.platine.myFitBuddy.utils.MyUtils;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
@@ -10,6 +12,8 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
@@ -25,8 +29,13 @@ public class ExerciseServiceImpl implements ExerciseService {
   private ResourceLoader resourceLoader;
 
   @Override
-  public List<Exercise> getAllExercises() {
-    return exerciseRepository.findAll();
+  public Page<Exercise> findByKeyAndMuscleGroup(
+    final String key,
+    final MuscleGroup muscleGroup,
+    final Pageable pageable
+  ) {
+    String normalKey = MyUtils.normalize(key);
+    return exerciseRepository.findByKeyAndMuscleGroup(normalKey, muscleGroup, pageable);
   }
 
   @Override

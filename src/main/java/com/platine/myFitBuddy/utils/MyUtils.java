@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public abstract class MyUtils {
 
   /**
-   * Normalize string in order to standardize database
+   * Normalize string in order to standardize database or researches
    * @param s
    * @return
    */
@@ -17,6 +17,7 @@ public abstract class MyUtils {
     String lowerCase = s.toLowerCase();
     String normalized = Normalizer.normalize(lowerCase, Normalizer.Form.NFD);
     Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-    return pattern.matcher(normalized).replaceAll("");
+    String withoutDiacritics = pattern.matcher(normalized).replaceAll("");
+    return withoutDiacritics.replace(" ", "_");
   }
 }
