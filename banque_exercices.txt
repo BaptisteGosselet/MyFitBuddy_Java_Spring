@@ -8,7 +8,7 @@ Source : https://www.fitadium.com/conseils/entrainement/exercices-musculation/
 - Écartés couchés / Dumbbell Flyes / DUMBBELL_FLYES
 - Écartés à la machine / Machine Flyes / MACHINE_FLYES
 - Dips (poitrine) / Chest Dips / CHEST_DIPS
-- Pec deck (butterfly) / Pec Deck Fly / PEC_DECK_FLY
+- Cable fly / Cable fly / CABLE_FLYES
 - Pompes / Push-ups / PUSH_UPS
 
 2. Exercices pour les dorsaux (dos)
@@ -63,17 +63,12 @@ b. Triceps
 - Développé couché prise serrée / Close-Grip Bench Press / CLOSE_GRIP_BENCH_PRESS
 - Extensions triceps barre / Barbell Triceps Extension / BARBELL_TRICEPS_EXTENSION
 - Extensions triceps haltères / Dumbbell Triceps Extension / DUMBBELL_TRICEPS_EXTENSION
-- Dips (triceps) / Triceps Dips / TRICEPS_DIPS
 - Extensions à la poulie / Cable Triceps Extension / CABLE_TRICEPS_EXTENSION
-- Barre au front / Skull Crusher / SKULL_CRUSHER
 
 6. Exercices pour les abdominaux
 
 - Crunchs / Crunches / CRUNCHES
 - Relevé de jambes / Leg Raises / LEG_RAISES
-- Planche / Plank / PLANK
 - Russian twist / Russian Twist / RUSSIAN_TWIST
 - Mountain climbers / Mountain Climbers / MOUNTAIN_CLIMBERS
-- V-ups / V-ups / V_UPS
-- Gainage latéral / Side Plank / SIDE_PLANK
 - Roues abdominales / Ab Wheel Rollout / AB_WHEEL_ROLLOUT
