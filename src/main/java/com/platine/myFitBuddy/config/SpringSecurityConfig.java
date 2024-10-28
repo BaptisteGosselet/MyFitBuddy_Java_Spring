@@ -31,6 +31,7 @@ public class SpringSecurityConfig {
             .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/proxy/**")
             .permitAll();
           auth.requestMatchers("/auth/signup", "/auth/signin").permitAll();
+          auth.requestMatchers("/exercises/*/image").permitAll();
           auth.requestMatchers("/test").permitAll();
           auth.requestMatchers("/users/all").hasRole("ADMIN");
           auth.requestMatchers("/sessions/all").hasRole("ADMIN");
