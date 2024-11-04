@@ -22,7 +22,9 @@ public class SessionControllerImpl implements SessionController {
   public ResponseEntity<Session> findById(final long sessionId) {
     DBUser user = dbUserService.getCurrentUser();
     Optional<Session> sessionOptional = sessionService.findById(sessionId, user);
-      return sessionOptional.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    return sessionOptional
+      .map(ResponseEntity::ok)
+      .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @Override
