@@ -4,6 +4,7 @@ import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
 import com.platine.myFitBuddy.features.sessions.model.Session;
 import com.platine.myFitBuddy.features.sessions.model.SessionCreateForm;
+import com.platine.myFitBuddy.features.sessions.model.SessionUpdateForm;
 import com.platine.myFitBuddy.features.sessions.service.SessionServiceImpl;
 import java.util.List;
 import java.util.Optional;
@@ -41,5 +42,17 @@ public class SessionControllerImpl implements SessionController {
   @Override
   public ResponseEntity<List<Session>> getAllSessions() {
     return ResponseEntity.ok(sessionService.findAll());
+  }
+
+  @Override
+  public ResponseEntity<Session> update(long sessionId, SessionUpdateForm updatedSession) {
+    DBUser user = dbUserService.getCurrentUser();
+    return ResponseEntity.ok(sessionService.update(updatedSession, user));
+  }
+
+  @Override
+  public ResponseEntity<Boolean> delete(long sessionId) {
+    sessionService.delete(sessionId);
+    return ResponseEntity.ok(true);
   }
 }
