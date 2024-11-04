@@ -5,7 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
@@ -26,8 +28,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 @AllArgsConstructor
 public class DBUser implements UserDetails {
 
-  public DBUser(String username, String password, String role) {
+  public DBUser(String username, String email, String password, String role) {
     this.username = username;
+    this.email = email;
     this.password = password;
     this.role = role;
   }
@@ -41,10 +44,12 @@ public class DBUser implements UserDetails {
   private String username;
 
   @NotBlank
+  @Email
   @Column(unique = true)
   private String email;
 
   @NotBlank
+  @Size(min = 8)
   private String password;
 
   @NotBlank

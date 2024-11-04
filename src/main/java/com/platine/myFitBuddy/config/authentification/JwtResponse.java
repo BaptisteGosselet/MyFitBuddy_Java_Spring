@@ -1,5 +1,6 @@
 package com.platine.myFitBuddy.config.authentification;
 
+import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,15 +9,24 @@ import lombok.Setter;
 public class JwtResponse {
   private String accessToken;
   private String refreshToken;
-  private long expiresIn;
 
-  public JwtResponse(String accessToken, long expiresIn) {
+  private Date accessExpirationDate;
+  private Date refreshExpirationDate;
+
+  public JwtResponse(String accessToken, long accessExpiresIn) {
     this.accessToken = accessToken;
-    this.expiresIn = expiresIn;
+    this.accessExpirationDate = new Date(System.currentTimeMillis() + accessExpiresIn);
   }
 
-  public JwtResponse(String accessToken, String refreshToken) {
+  public JwtResponse(
+    String accessToken,
+    long accessExpiresIn,
+    String refreshToken,
+    long refreshExpiresIn
+  ) {
     this.accessToken = accessToken;
+    this.accessExpirationDate = new Date(System.currentTimeMillis() + accessExpiresIn);
     this.refreshToken = refreshToken;
+    this.refreshExpirationDate = new Date(System.currentTimeMillis() + refreshExpiresIn);
   }
 }
