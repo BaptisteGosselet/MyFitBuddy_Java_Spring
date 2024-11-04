@@ -7,11 +7,10 @@ import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreate
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdateForm;
 import com.platine.myFitBuddy.features.sessionContent.repository.SessionContentRepository;
 import jakarta.transaction.Transactional;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @Transactional
@@ -27,12 +26,20 @@ public class SessionContentServiceImpl implements SessionContentService {
 
   @Override
   public SessionContent create(SessionContentCreateForm createForm, DBUser user) {
-    return sessionContentRepository.save(SessionContentMapper.mapFromCreateForm(createForm, user));
+    return sessionContentRepository.save(
+      SessionContentMapper.mapFromCreateForm(createForm, user)
+    );
   }
 
   @Override
-  public SessionContent update(SessionContentUpdateForm updateForm, Long sessionContentId, DBUser user) {
-    return sessionContentRepository.save(SessionContentMapper.mapFromUpdateForm(updateForm, sessionContentId, user));
+  public SessionContent update(
+    SessionContentUpdateForm updateForm,
+    Long sessionContentId,
+    DBUser user
+  ) {
+    return sessionContentRepository.save(
+      SessionContentMapper.mapFromUpdateForm(updateForm, sessionContentId, user)
+    );
   }
 
   @Override
