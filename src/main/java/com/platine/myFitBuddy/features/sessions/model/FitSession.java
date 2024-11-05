@@ -13,9 +13,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Session {
+public class FitSession {
 
-  public Session(String name, DBUser user) {
+  public FitSession(String name, DBUser user) {
     this.name = name;
     this.user = user;
   }
