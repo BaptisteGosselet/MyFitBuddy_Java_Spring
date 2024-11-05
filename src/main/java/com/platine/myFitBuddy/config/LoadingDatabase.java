@@ -6,7 +6,7 @@ import com.platine.myFitBuddy.features.dbUsers.repository.DBUserRepository;
 import com.platine.myFitBuddy.features.exercices.model.Exercise;
 import com.platine.myFitBuddy.features.exercices.model.MuscleGroup;
 import com.platine.myFitBuddy.features.exercices.repository.ExerciseRepository;
-import com.platine.myFitBuddy.features.sessions.model.Session;
+import com.platine.myFitBuddy.features.sessions.model.FitSession;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class LoadingDatabase implements CommandLineRunner {
 
     // Sessions
     for (int i = 0; i < 10; i++) {
-      sampleRepository.save(new Session(faker.name().title(), dbUser));
+      sampleRepository.save(new FitSession(faker.name().title(), dbUser));
     }
 
     log.info("Database loaded.");

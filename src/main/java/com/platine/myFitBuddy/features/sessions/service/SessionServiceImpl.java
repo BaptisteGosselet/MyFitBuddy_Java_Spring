@@ -1,7 +1,7 @@
 package com.platine.myFitBuddy.features.sessions.service;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
-import com.platine.myFitBuddy.features.sessions.model.Session;
+import com.platine.myFitBuddy.features.sessions.model.FitSession;
 import com.platine.myFitBuddy.features.sessions.model.SessionCreateForm;
 import com.platine.myFitBuddy.features.sessions.model.SessionUpdateForm;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
@@ -20,8 +20,8 @@ public class SessionServiceImpl implements SessionService {
   private final SessionRepository sessionRepository;
 
   @Override
-  public Optional<Session> findById(final long sessionId, final DBUser user) {
-    Optional<Session> foundedSession = sessionRepository.findById(sessionId);
+  public Optional<FitSession> findById(final long sessionId, final DBUser user) {
+    Optional<FitSession> foundedSession = sessionRepository.findById(sessionId);
     if (
       foundedSession.isPresent() && foundedSession.get().getUser().getId() == user.getId()
     ) {
@@ -32,19 +32,19 @@ public class SessionServiceImpl implements SessionService {
   }
 
   @Override
-  public List<Session> findByUserId(final DBUser user) {
+  public List<FitSession> findByUserId(final DBUser user) {
     return sessionRepository.findByUserId(user.getId());
   }
 
   @Override
-  public Session create(SessionCreateForm createForm, final DBUser user) {
-    Session sessionToCreate = new Session(createForm.getName(), user);
+  public FitSession create(SessionCreateForm createForm, final DBUser user) {
+    FitSession sessionToCreate = new FitSession(createForm.getName(), user);
     return sessionRepository.save(sessionToCreate);
   }
 
   @Override
-  public Session update(SessionUpdateForm updateForm, final DBUser user) {
-    Session sessionToUpdate = new Session(updateForm.getName(), user);
+  public FitSession update(SessionUpdateForm updateForm, final DBUser user) {
+    FitSession sessionToUpdate = new FitSession(updateForm.getName(), user);
     return sessionRepository.save(sessionToUpdate);
   }
 
@@ -54,7 +54,7 @@ public class SessionServiceImpl implements SessionService {
   }
 
   @Override
-  public List<Session> findAll() {
+  public List<FitSession> findAll() {
     return sessionRepository.findAll();
   }
 }

@@ -2,7 +2,7 @@ package com.platine.myFitBuddy.features.sessions.controller;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
-import com.platine.myFitBuddy.features.sessions.model.Session;
+import com.platine.myFitBuddy.features.sessions.model.FitSession;
 import com.platine.myFitBuddy.features.sessions.model.SessionCreateForm;
 import com.platine.myFitBuddy.features.sessions.model.SessionUpdateForm;
 import com.platine.myFitBuddy.features.sessions.service.SessionServiceImpl;
@@ -19,35 +19,35 @@ public class SessionControllerImpl implements SessionController {
   private final DBUserServiceImpl dbUserService;
 
   @Override
-  public ResponseEntity<Session> findById(final long sessionId) {
+  public ResponseEntity<FitSession> findById(final long sessionId) {
     DBUser user = dbUserService.getCurrentUser();
-    Optional<Session> sessionOptional = sessionService.findById(sessionId, user);
+    Optional<FitSession> sessionOptional = sessionService.findById(sessionId, user);
     return sessionOptional
       .map(ResponseEntity::ok)
       .orElseGet(() -> ResponseEntity.notFound().build());
   }
 
   @Override
-  public ResponseEntity<List<Session>> findByUser() {
+  public ResponseEntity<List<FitSession>> findByUser() {
     DBUser user = dbUserService.getCurrentUser();
-    List<Session> sessionsList = sessionService.findByUserId(user);
+    List<FitSession> sessionsList = sessionService.findByUserId(user);
     return ResponseEntity.ok(sessionsList);
   }
 
   @Override
-  public ResponseEntity<Session> create(final SessionCreateForm createForm) {
+  public ResponseEntity<FitSession> create(final SessionCreateForm createForm) {
     DBUser user = dbUserService.getCurrentUser();
-    Session createdSession = sessionService.create(createForm, user);
+    FitSession createdSession = sessionService.create(createForm, user);
     return ResponseEntity.ok(createdSession);
   }
 
   @Override
-  public ResponseEntity<List<Session>> getAllSessions() {
+  public ResponseEntity<List<FitSession>> getAllSessions() {
     return ResponseEntity.ok(sessionService.findAll());
   }
 
   @Override
-  public ResponseEntity<Session> update(
+  public ResponseEntity<FitSession> update(
     long sessionId,
     SessionUpdateForm updatedSession
   ) {
