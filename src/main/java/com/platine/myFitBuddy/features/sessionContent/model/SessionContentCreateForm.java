@@ -11,10 +11,13 @@ import lombok.Setter;
 public class SessionContentCreateForm {
   @NotNull
   private Long sessionId;
+
   @NotNull
   private Long exerciseId;
+
   @NotNull
   private int numberOfSet;
+
   @NotNull
   private int restTimeInSecond;
 }

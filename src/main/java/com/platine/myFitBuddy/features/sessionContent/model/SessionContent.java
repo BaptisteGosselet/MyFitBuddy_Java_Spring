@@ -14,10 +14,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SessionContent {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+
   private Long sessionId;
   private Long exerciseId;
   private int numberOfSet;

@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class SessionDTO {
-    private Long id;
-    private String name;
-    private int NumberOfExercise;
+  private Long id;
+  private String name;
+  private int NumberOfExercise;
 }

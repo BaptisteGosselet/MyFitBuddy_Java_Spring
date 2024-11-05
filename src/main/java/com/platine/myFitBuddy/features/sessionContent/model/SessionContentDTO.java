@@ -10,9 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SessionContentDTO {
-    private Long id;
-    private Long sessionId;
-    private Long exerciseId;
-    private int numberOfSet;
-    private int restTimeInSecond;
+  private Long id;
+  private Long sessionId;
+  private Long exerciseId;
+  private int numberOfSet;
+  private int restTimeInSecond;
 }
