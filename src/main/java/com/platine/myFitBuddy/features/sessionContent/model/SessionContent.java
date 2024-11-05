@@ -22,6 +22,7 @@ public class SessionContent {
   private Long exerciseId;
   private int numberOfSet;
   private int restTimeInSecond;
+  private int index;
 
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)

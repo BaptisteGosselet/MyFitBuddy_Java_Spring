@@ -10,4 +10,5 @@ import lombok.Setter;
 public class SessionContentUpdateForm {
   private int numberOfSet;
   private int restTimeInSecond;
+  private int index;
 }
