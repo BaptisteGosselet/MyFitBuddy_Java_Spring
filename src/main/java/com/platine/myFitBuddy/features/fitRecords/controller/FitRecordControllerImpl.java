@@ -32,7 +32,7 @@ public class FitRecordControllerImpl implements FitRecordController {
   }
 
   @Override
-  public ResponseEntity<FitRecord> deleteRecord(long recordId) {
+  public ResponseEntity<Boolean> deleteRecord(long recordId) {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'deleteRecord'");
   }

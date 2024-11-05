@@ -21,5 +21,5 @@ public interface FitRecordController {
   ResponseEntity<FitRecord> createRecord(@PathVariable("sessionId") final long sessionId);
 
   @DeleteMapping(value = "/delete/{recordId}", produces = "application/json")
-  ResponseEntity<FitRecord> deleteRecord(@PathVariable("recordId") final long recordId);
+  ResponseEntity<Boolean> deleteRecord(@PathVariable("recordId") final long recordId);
 }
