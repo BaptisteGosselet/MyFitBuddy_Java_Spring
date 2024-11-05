@@ -1,4 +1,4 @@
-package com.platine.myFitBuddy.features.records.controller;
+package com.platine.myFitBuddy.features.fitRecords.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

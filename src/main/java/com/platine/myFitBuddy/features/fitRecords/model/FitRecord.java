@@ -1,4 +1,4 @@
-package com.platine.myFitBuddy.features.records.model;
+package com.platine.myFitBuddy.features.fitRecords.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

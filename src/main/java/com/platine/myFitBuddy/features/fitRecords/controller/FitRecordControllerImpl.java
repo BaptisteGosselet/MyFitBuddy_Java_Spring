@@ -1,6 +1,6 @@
-package com.platine.myFitBuddy.features.records.controller;
+package com.platine.myFitBuddy.features.fitRecords.controller;
 
-import com.platine.myFitBuddy.features.records.service.FitRecordServiceImpl;
+import com.platine.myFitBuddy.features.fitRecords.service.FitRecordServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
