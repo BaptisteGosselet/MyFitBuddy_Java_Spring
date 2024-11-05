@@ -18,5 +18,5 @@ public interface SessionService {
 
   Session update(final SessionUpdateForm updateForm, final DBUser user);
 
-  Session delete(final long sessionId, final DBUser user);
+  void delete(final long sessionId);
 }
