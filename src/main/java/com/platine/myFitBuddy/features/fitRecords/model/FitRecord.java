@@ -1,4 +1,4 @@
-package com.platine.myFitBuddy.features.records.model;
+package com.platine.myFitBuddy.features.fitRecords.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,9 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Record {
+public class FitRecord {
 
-  public Record(LocalDate date, String name) {
+  public FitRecord(LocalDate date, String name) {
     this.date = date;
     this.name = name;
   }

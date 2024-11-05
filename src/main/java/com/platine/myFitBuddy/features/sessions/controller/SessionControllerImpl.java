@@ -47,7 +47,10 @@ public class SessionControllerImpl implements SessionController {
   }
 
   @Override
-  public ResponseEntity<Session> update(long sessionId, SessionUpdateForm updatedSession) {
+  public ResponseEntity<Session> update(
+    long sessionId,
+    SessionUpdateForm updatedSession
+  ) {
     DBUser user = dbUserService.getCurrentUser();
     return ResponseEntity.ok(sessionService.update(updatedSession, user));
   }
