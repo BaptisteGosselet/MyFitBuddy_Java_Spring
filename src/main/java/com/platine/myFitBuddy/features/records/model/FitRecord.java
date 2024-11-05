@@ -14,9 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Record {
+public class FitRecord {
 
-  public Record(LocalDate date, String name) {
+  public FitRecord(LocalDate date, String name) {
     this.date = date;
     this.name = name;
   }

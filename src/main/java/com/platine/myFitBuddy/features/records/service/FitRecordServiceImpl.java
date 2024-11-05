@@ -1,6 +1,6 @@
-package com.platine.myFitBuddy.features.fitSets.service;
+package com.platine.myFitBuddy.features.records.service;
 
-import com.platine.myFitBuddy.features.fitSets.repository.FitSetRepository;
+import com.platine.myFitBuddy.features.records.repository.FitRecordRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FitSetServiceImpl implements FitSetService {
+public class FitRecordServiceImpl implements FitRecordService {
   @Autowired
-  private final FitSetRepository fitSetRepository;
+  private final FitRecordRepository recordRepository;
 }
