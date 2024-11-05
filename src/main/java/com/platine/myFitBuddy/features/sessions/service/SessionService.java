@@ -18,5 +18,5 @@ public interface SessionService {
 
   FitSession update(final SessionUpdateForm updateForm, final DBUser user);
 
-  void delete(final long sessionId);
+  void delete(final long sessionId, final DBUser user);
 }

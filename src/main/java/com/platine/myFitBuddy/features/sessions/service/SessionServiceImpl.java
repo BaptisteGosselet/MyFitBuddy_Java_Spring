@@ -9,26 +9,19 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class SessionServiceImpl implements SessionService {
-  @Autowired
   private final SessionRepository sessionRepository;
 
   @Override
   public Optional<FitSession> findById(final long sessionId, final DBUser user) {
-    Optional<FitSession> foundedSession = sessionRepository.findById(sessionId);
-    if (
-      foundedSession.isPresent() && foundedSession.get().getUser().getId() == user.getId()
-    ) {
-      return foundedSession;
-    } else {
-      return Optional.empty();
-    }
+    return sessionRepository
+      .findById(sessionId)
+      .filter(session -> session.getUser().getId() == user.getId());
   }
 
   @Override
@@ -44,13 +37,29 @@ public class SessionServiceImpl implements SessionService {
 
   @Override
   public FitSession update(SessionUpdateForm updateForm, final DBUser user) {
-    FitSession sessionToUpdate = new FitSession(updateForm.getName(), user);
-    return sessionRepository.save(sessionToUpdate);
+    return sessionRepository
+      .findById(updateForm.getSessionId())
+      .filter(session -> session.getUser().getId() == user.getId())
+      .map(
+        session -> {
+          session.setName(updateForm.getName()); // met à jour le nom
+          return sessionRepository.save(session); // sauvegarde et retourne
+        }
+      )
+      .orElseThrow(
+        () -> new IllegalArgumentException("Session not found or unauthorized")
+      );
   }
 
   @Override
-  public void delete(long sessionId) {
-    sessionRepository.deleteById(sessionId);
+  public void delete(long sessionId, final DBUser user) {
+    FitSession sessionToDelete = sessionRepository
+      .findById(sessionId)
+      .filter(session -> session.getUser().getId() == user.getId())
+      .orElseThrow(
+        () -> new IllegalArgumentException("Session not found or unauthorized")
+      );
+    sessionRepository.delete(sessionToDelete);
   }
 
   @Override

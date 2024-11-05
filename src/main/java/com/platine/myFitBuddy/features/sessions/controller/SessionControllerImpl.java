@@ -57,7 +57,8 @@ public class SessionControllerImpl implements SessionController {
 
   @Override
   public ResponseEntity<Boolean> delete(long sessionId) {
-    sessionService.delete(sessionId);
+    DBUser user = dbUserService.getCurrentUser();
+    sessionService.delete(sessionId, user);
     return ResponseEntity.ok(true);
   }
 }
