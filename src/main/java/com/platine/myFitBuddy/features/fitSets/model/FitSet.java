@@ -15,25 +15,25 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class FitSet {
-    
-    public FitSet(int order, int nbRep, int weight, int feeling){
-        this.order = order;
-        this.nbRep = nbRep;
-        this.weight = weight;
-        this.feeling = feeling;
-    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+  public FitSet(int order, int nbRep, int weight, int feeling) {
+    this.order = order;
+    this.nbRep = nbRep;
+    this.weight = weight;
+    this.feeling = feeling;
+  }
 
-    private int order;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private long id;
 
-    private int nbRep;
+  private int order;
 
-    private int weight;
+  private int nbRep;
 
-    @Min(value = 1)
-    @Max(value = 3)
-    private int feeling;
+  private int weight;
+
+  @Min(value = 1)
+  @Max(value = 3)
+  private int feeling;
 }
