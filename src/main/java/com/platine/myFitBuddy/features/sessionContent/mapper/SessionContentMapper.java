@@ -19,6 +19,7 @@ public class SessionContentMapper {
     sessionContent.setExerciseId(sessionContentCreateForm.getExerciseId());
     sessionContent.setNumberOfSet(sessionContentCreateForm.getNumberOfSet());
     sessionContent.setRestTimeInSecond(sessionContentCreateForm.getRestTimeInSecond());
+    sessionContent.setIndex(sessionContentCreateForm.getIndex());
     sessionContent.setUser(user);
     return sessionContent;
   }
@@ -32,6 +33,8 @@ public class SessionContentMapper {
     sessionContent.setId(sessionContentId);
     sessionContent.setNumberOfSet(sessionContentUpdateForm.getNumberOfSet());
     sessionContent.setRestTimeInSecond(sessionContentUpdateForm.getRestTimeInSecond());
+    sessionContent.setIndex(sessionContentUpdateForm.getIndex());
+    sessionContent.setUser(user);
     return sessionContent;
   }
 
@@ -41,6 +44,7 @@ public class SessionContentMapper {
     sessionContentDTO.setExerciseId(sessionContent.getExerciseId());
     sessionContentDTO.setNumberOfSet(sessionContent.getNumberOfSet());
     sessionContentDTO.setRestTimeInSecond(sessionContent.getRestTimeInSecond());
+    sessionContentDTO.setIndex(sessionContent.getIndex());
     return sessionContentDTO;
   }
 }
