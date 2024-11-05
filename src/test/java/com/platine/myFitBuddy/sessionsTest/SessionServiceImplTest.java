@@ -8,12 +8,13 @@ import static org.mockito.Mockito.when;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.sessions.model.FitSession;
+import com.platine.myFitBuddy.features.sessions.model.SessionCreateForm;
+import com.platine.myFitBuddy.features.sessions.model.SessionUpdateForm;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import com.platine.myFitBuddy.features.sessions.service.SessionServiceImpl;
+import java.util.List;
 import java.util.Optional;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,11 +28,6 @@ public class SessionServiceImplTest {
 
   @InjectMocks
   SessionServiceImpl sessionServiceImpl;
-
-  FitSession generateDummySession(DBUser user) {
-    FitSession session = new FitSession("dummy", user);
-    return session;
-  }
 
   FitSession dummySession;
   DBUser dummyUser;
@@ -58,26 +54,90 @@ public class SessionServiceImplTest {
   }
 
   @Test
-  @Disabled
-  void findByIdTestWrongUser() {}
+  void findByIdTestWrongUser() {
+    final long sessionId = 1;
+    DBUser otherUser = new DBUser();
+    otherUser.setId(2);
+
+    when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(dummySession));
+
+    Optional<FitSession> result = sessionServiceImpl.findById(sessionId, otherUser);
+
+    assertThat(result).isEmpty();
+
+    verify(sessionRepository).findById(sessionId);
+    verifyNoMoreInteractions(sessionRepository);
+  }
 
   @Test
-  @Disabled
-  void findByUserTest() {}
+  void findByUserTest() {
+    when(sessionRepository.findByUserId(dummyUser.getId()))
+      .thenReturn(List.of(dummySession));
+
+    List<FitSession> result = sessionServiceImpl.findByUserId(dummyUser);
+
+    assertThat(result).isNotEmpty().contains(dummySession);
+
+    verify(sessionRepository).findByUserId(dummyUser.getId());
+    verifyNoMoreInteractions(sessionRepository);
+  }
 
   @Test
-  @Disabled
-  void getAllSessionsTest() {}
+  void getAllSessionsTest() {
+    when(sessionRepository.findAll()).thenReturn(List.of(dummySession));
+
+    List<FitSession> result = sessionServiceImpl.findAll();
+
+    assertThat(result).isNotEmpty().contains(dummySession);
+
+    verify(sessionRepository).findAll();
+    verifyNoMoreInteractions(sessionRepository);
+  }
 
   @Test
-  @Disabled
-  void createTest() {}
+  void createTest() {
+    SessionCreateForm createForm = new SessionCreateForm("new session");
+    FitSession newSession = new FitSession(createForm.getName(), dummyUser);
+
+    when(sessionRepository.save(any(FitSession.class))).thenReturn(newSession);
+
+    FitSession result = sessionServiceImpl.create(createForm, dummyUser);
+
+    assertThat(result).isNotNull().isEqualTo(newSession);
+
+    verify(sessionRepository).save(any(FitSession.class));
+    verifyNoMoreInteractions(sessionRepository);
+  }
 
   @Test
-  @Disabled
-  void updateTest() {}
+  void updateTest() {
+    final long sessionId = 1;
+    SessionUpdateForm updateForm = new SessionUpdateForm(sessionId, "updated session");
+    dummySession.setName("updated session");
+
+    when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(dummySession));
+    when(sessionRepository.save(dummySession)).thenReturn(dummySession);
+
+    FitSession result = sessionServiceImpl.update(updateForm, dummyUser);
+
+    assertThat(result).isNotNull().isEqualTo(dummySession);
+    assertThat(result.getName()).isEqualTo("updated session");
+
+    verify(sessionRepository).findById(sessionId);
+    verify(sessionRepository).save(dummySession);
+    verifyNoMoreInteractions(sessionRepository);
+  }
 
   @Test
-  @Disabled
-  void deleteTest() {}
+  void deleteTest() {
+    final long sessionId = 1;
+
+    when(sessionRepository.findById(sessionId)).thenReturn(Optional.of(dummySession));
+
+    sessionServiceImpl.delete(sessionId, dummyUser);
+
+    verify(sessionRepository).findById(sessionId);
+    verify(sessionRepository).delete(dummySession);
+    verifyNoMoreInteractions(sessionRepository);
+  }
 }
