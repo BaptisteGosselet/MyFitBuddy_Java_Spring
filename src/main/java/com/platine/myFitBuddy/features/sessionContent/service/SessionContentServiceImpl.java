@@ -32,8 +32,14 @@ public class SessionContentServiceImpl implements SessionContentService {
   }
 
   @Override
-  public SessionContent update(SessionContentUpdateForm updateForm, Long sessionContentId, DBUser user) {
-    return sessionContentRepository.save(SessionContentMapper.mapFromUpdateForm(updateForm, sessionContentId, user));
+  public SessionContent update(
+    SessionContentUpdateForm updateForm,
+    Long sessionContentId,
+    DBUser user
+  ) {
+    return sessionContentRepository.save(
+      SessionContentMapper.mapFromUpdateForm(updateForm, sessionContentId, user)
+    );
   }
 
   @Override

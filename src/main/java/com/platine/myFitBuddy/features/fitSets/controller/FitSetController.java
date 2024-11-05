@@ -1,6 +1,34 @@
 package com.platine.myFitBuddy.features.fitSets.controller;
 
+import com.platine.myFitBuddy.features.fitSets.model.FitSet;
+import com.platine.myFitBuddy.features.fitSets.model.FitSetCreateForm;
+import com.platine.myFitBuddy.features.fitSets.model.FitSetUpdateForm;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import java.util.List;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequestMapping("/sets")
-public interface FitSetController {}
+public interface FitSetController {
+  @GetMapping(value = "/{setId}", produces = "application/json")
+  ResponseEntity<FitSet> getSetById(@PathVariable("setId") final long setId);
+
+  @GetMapping(value = "/{recordId}", produces = "application/json")
+  ResponseEntity<List<FitSet>> getSetsByRecordId(
+    @PathVariable("recordId") final long recordId
+  );
+
+  @PostMapping(value = "/create", produces = "application/json")
+  ResponseEntity<FitSet> addSetToSession(@RequestBody final FitSetCreateForm form);
+
+  @PutMapping(value = "/update", produces = "application/json")
+  ResponseEntity<FitSet> updateSet(@RequestBody final FitSetUpdateForm form);
+
+  @DeleteMapping(value = "/delete/{idSet}", produces = "application/json")
+  ResponseEntity<Boolean> deleteSet(@PathVariable("idSet") final long idSet);
+}

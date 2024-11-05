@@ -16,8 +16,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FitRecord {
 
-  public FitRecord(LocalDate date, String name) {
-    this.date = date;
+  public FitRecord(String name) {
+    this.date = LocalDate.now();
     this.name = name;
   }
 
