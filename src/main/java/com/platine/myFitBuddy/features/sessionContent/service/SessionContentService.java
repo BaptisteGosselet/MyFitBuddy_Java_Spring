@@ -11,11 +11,7 @@ public interface SessionContentService {
 
   SessionContent create(final SessionContentCreateForm createForm, final DBUser user);
 
-  SessionContent update(
-    SessionContentUpdateForm updateForm,
-    Long sessionContentId,
-    DBUser user
-  );
+  SessionContent update(SessionContentUpdateForm updateForm, Long sessionContentId, DBUser user);
 
-  SessionContent delete(final Long sessionId, final DBUser user);
+  void delete(final Long sessionId, final DBUser user);
 }

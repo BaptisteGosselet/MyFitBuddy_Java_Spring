@@ -16,6 +16,9 @@ public class SessionContentCreateForm {
   private Long exerciseId;
 
   @NotNull
+  private int index;
+
+  @NotNull
   private int numberOfSet;
 
   @NotNull

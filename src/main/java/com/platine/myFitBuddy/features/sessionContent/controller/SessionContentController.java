@@ -1,7 +1,7 @@
 package com.platine.myFitBuddy.features.sessionContent.controller;
 
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContent;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreateForm;
+import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTO;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdateForm;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -11,24 +11,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sessionContent")
 public interface SessionContentController {
   @GetMapping(value = "/{sessionId}", produces = "application/json")
-  ResponseEntity<List<SessionContent>> findByUserBySessionId(
-    @RequestParam("sessionId") Long sessionId
-  );
+  ResponseEntity<List<SessionContentDTO>> findByUserBySessionId(@RequestParam("sessionId") Long sessionId);
 
   @PostMapping(produces = "application/json", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
-  ResponseEntity<SessionContent> create(
-    @RequestBody final SessionContentCreateForm createForm
-  );
+  ResponseEntity<SessionContentDTO> create(@RequestBody final SessionContentCreateForm createForm);
 
-  @PutMapping(
-    value = "/{sessionContentId}",
-    produces = "application/json",
-    consumes = "application/json"
-  )
+  @PutMapping(value = "/{sessionContentId}", produces = "application/json", consumes = "application/json")
   @ResponseStatus(HttpStatus.OK)
-  ResponseEntity<SessionContent> update(
-    @RequestBody final SessionContentUpdateForm updateForm,
-    @RequestParam("sessionContentId") Long sessionId
-  );
+  ResponseEntity<SessionContentDTO> update(@RequestBody final SessionContentUpdateForm updateForm, @RequestParam("sessionContentId") Long sessionId);
+
+  @DeleteMapping(value = "/{sessionContentId}", produces = "application/json", consumes = "application/json")
+  ResponseEntity<Boolean> delete(@RequestParam("sessionContentId") Long sessionContentId);
+
+  @PutMapping(value = "/list", produces = "application/json", consumes = "application/json")
+  ResponseEntity<List<SessionContentDTO>> list(@RequestParam("sessionId") Long sessionId, @RequestBody List<SessionContentUpdateForm> listSessionToUpdate);
 }

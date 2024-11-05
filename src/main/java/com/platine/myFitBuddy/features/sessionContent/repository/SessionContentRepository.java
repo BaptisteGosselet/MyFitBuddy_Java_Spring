@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SessionContentRepository extends JpaRepository<SessionContent, Long> {
-  SessionContent findBySessionIdAndUser(Long sessionId, DBUser user);
-
   List<SessionContent> findSessionContentBySessionIdAndUser(Long sessionId, DBUser user);
+
+  void deleteBySessionIdAndUser(Long sessionId, DBUser user);
 }

@@ -15,4 +15,5 @@ public class SessionContentDTO {
   private Long exerciseId;
   private int numberOfSet;
   private int restTimeInSecond;
+  private int index;
 }
