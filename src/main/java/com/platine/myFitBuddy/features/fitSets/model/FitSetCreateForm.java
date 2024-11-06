@@ -12,20 +12,20 @@ import lombok.Setter;
 @AllArgsConstructor
 public class FitSetCreateForm {
   @NotNull
-  private long idRecord;
+  private Long idRecord;
 
   @NotNull
-  private long idExercise;
+  private Long idExercise;
 
-  private int nbOrder;
-
-  @NotNull
-  private int nbRep;
+  private Integer nbOrder;
 
   @NotNull
-  private int weight;
+  private Integer nbRep;
+
+  @NotNull
+  private Integer weight;
 
   @Min(value = 1, message = "Feeling must be at least 1")
   @Max(value = 3, message = "Feeling must not exceed 3")
-  private int feeling;
+  private Integer feeling;
 }
