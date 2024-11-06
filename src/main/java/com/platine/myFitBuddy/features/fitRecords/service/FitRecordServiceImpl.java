@@ -4,11 +4,9 @@ import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitRecords.repository.FitRecordRepository;
 import jakarta.transaction.Transactional;
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
 import java.util.Optional;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

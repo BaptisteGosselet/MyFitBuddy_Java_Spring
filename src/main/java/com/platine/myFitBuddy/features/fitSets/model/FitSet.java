@@ -1,7 +1,6 @@
 package com.platine.myFitBuddy.features.fitSets.model;
 
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -50,5 +49,4 @@ public class FitSet {
   @ManyToOne
   @JoinColumn(name = "record_id", nullable = false)
   private FitRecord record;
-
 }
