@@ -3,6 +3,7 @@ package com.platine.myFitBuddy.features.fitRecords.service;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitRecords.repository.FitRecordRepository;
+import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -17,27 +18,44 @@ public class FitRecordServiceImpl implements FitRecordService {
   @Autowired
   private final FitRecordRepository recordRepository;
 
+  @Autowired
+  private final SessionRepository sessionRepository;
+
   @Override
   public Optional<FitRecord> getRecordById(long recordId, DBUser user) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getRecordById'");
+    return recordRepository
+      .findById(recordId)
+      .filter(record -> record.getUser().equals(user));
   }
 
   @Override
   public List<FitRecord> getRecordsOfUser(DBUser user) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'getRecordsOfUser'");
+    return recordRepository.findByUser(user);
   }
 
   @Override
   public FitRecord createRecord(long sessionId, DBUser user) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createRecord'");
+    String sessionName = sessionRepository
+      .findById(sessionId)
+      .map(session -> session.getName())
+      .orElseThrow(() -> new IllegalArgumentException("Session non trouvée"));
+
+    FitRecord newRecord = new FitRecord();
+    newRecord.setUser(user);
+    newRecord.setName(sessionName);
+
+    return recordRepository.save(newRecord);
   }
 
   @Override
   public void deleteRecord(long recordId, DBUser user) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deleteRecord'");
+    Optional<FitRecord> record = getRecordById(recordId, user);
+    if (record.isPresent()) {
+      recordRepository.delete(record.get());
+    } else {
+      throw new IllegalArgumentException(
+        "Enregistrement non trouvé ou vous n'êtes pas autorisé à le supprimer."
+      );
+    }
   }
 }
