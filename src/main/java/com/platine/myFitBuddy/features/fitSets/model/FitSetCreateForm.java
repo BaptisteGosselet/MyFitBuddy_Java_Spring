@@ -1,5 +1,6 @@
 package com.platine.myFitBuddy.features.fitSets.model;
 
+import com.platine.myFitBuddy.utils.MyUtils;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ public class FitSetCreateForm {
   @NotNull
   private Integer weight;
 
-  @Min(value = 1, message = "Feeling must be at least 1")
-  @Max(value = 3, message = "Feeling must not exceed 3")
+  @Min(value = MyUtils.SET_FEELING_MIN)
+  @Max(value = MyUtils.SET_FEELING_MAX)
   private Integer feeling;
 }

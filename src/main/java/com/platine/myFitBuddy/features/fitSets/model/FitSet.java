@@ -1,6 +1,7 @@
 package com.platine.myFitBuddy.features.fitSets.model;
 
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
+import com.platine.myFitBuddy.utils.MyUtils;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,13 +20,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FitSet {
 
-<<<<<<< HEAD
-  public FitSet(int nbOrder, int nbRep, int weight, int feeling) {
+  public FitSet(int nbOrder, int nbRep, int weight, int feeling, FitRecord record) {
     this.nbOrder = nbOrder;
-=======
-  public FitSet(int order, int nbRep, int weight, int feeling, FitRecord record) {
-    this.nbOrder = order;
->>>>>>> b65354f (:sparkles: - FitSet service)
     this.nbRep = nbRep;
     this.weight = weight;
     this.feeling = feeling;
@@ -42,8 +38,8 @@ public class FitSet {
 
   private int weight;
 
-  @Min(value = 1)
-  @Max(value = 3)
+  @Min(value = MyUtils.SET_FEELING_MIN)
+  @Max(value = MyUtils.SET_FEELING_MAX)
   private int feeling;
 
   @ManyToOne

@@ -4,6 +4,8 @@ import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 public abstract class MyUtils {
+  public static final int SET_FEELING_MIN = 1;
+  public static final int SET_FEELING_MAX = 3;
 
   /**
    * Normalize string in order to standardize database or researches
