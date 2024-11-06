@@ -8,7 +8,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class FitSetUpdateForm {
-  private long idFitSet;
-  private long idExercise;
-  private int nbOrder;
+  private Long idFitSet;
+  private Long idExercise;
+  private Integer nbOrder;
+  private Integer nbRep;
+  private Integer weight;
+  private Integer feeling;
 }
