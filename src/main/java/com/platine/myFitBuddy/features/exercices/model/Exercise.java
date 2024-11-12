@@ -17,9 +17,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Exercise {
 
-  public Exercise(String key, MuscleGroup muscleGroup) {
+  public Exercise(String key, MuscleGroup muscleGroup, String labelEn, String labelFr) {
     this.key = key;
     this.muscleGroup = muscleGroup;
+    this.labelEn = labelEn;
+    this.labelFr = labelFr;
   }
 
   @Id
@@ -32,4 +34,10 @@ public class Exercise {
 
   @NotNull
   private MuscleGroup muscleGroup;
+
+  @NotBlank
+  private String labelEn;
+
+  @NotBlank
+  private String labelFr;
 }
