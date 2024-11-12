@@ -37,8 +37,7 @@ public class SessionControllerImpl implements SessionController {
   @Override
   public ResponseEntity<FitSession> create(final SessionCreateForm createForm) {
     DBUser user = dbUserService.getCurrentUser();
-    FitSession createdSession = sessionService.create(createForm, user);
-    return ResponseEntity.ok(createdSession);
+    return ResponseEntity.ok(sessionService.create(createForm, user));
   }
 
   @Override
