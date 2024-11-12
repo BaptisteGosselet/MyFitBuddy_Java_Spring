@@ -1,5 +1,9 @@
 package com.platine.myFitBuddy.features.fitSets.model;
 
+import com.platine.myFitBuddy.utils.MyUtils;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +12,21 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class FitSetCreateForm {
-  private long idRecord;
-  private long idExercise;
-  private int nbOrder;
+  @NotNull
+  private Long idRecord;
+
+  @NotNull
+  private Long idExercise;
+
+  private Integer nbOrder;
+
+  @NotNull
+  private Integer nbRep;
+
+  @NotNull
+  private Integer weight;
+
+  @Min(value = MyUtils.SET_FEELING_MIN)
+  @Max(value = MyUtils.SET_FEELING_MAX)
+  private Integer feeling;
 }
