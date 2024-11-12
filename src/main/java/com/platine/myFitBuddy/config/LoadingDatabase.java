@@ -99,7 +99,7 @@ public class LoadingDatabase implements CommandLineRunner {
         "MACHINE_FLYES",
         MuscleGroup.PECTORALS,
         "Machine Flyes",
-        "Ecarte à la machine"
+        "Ecarte a la machine"
       )
     );
     exerciseRepository.save(
@@ -140,7 +140,7 @@ public class LoadingDatabase implements CommandLineRunner {
         "SEATED_CABLE_ROW",
         MuscleGroup.BACK,
         "Seated Cable Row",
-        "Rowing assis à la poulie"
+        "Rowing assis a la poulie"
       )
     );
     exerciseRepository.save(
