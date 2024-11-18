@@ -11,24 +11,27 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SessionContentDTOWithExerciseKey {
-    private Long id;
-    private Long sessionId;
-    private Long exerciseId;
-    private int numberOfSet;
-    private int restTimeInSecond;
-    private int index;
+  private Long id;
+  private Long sessionId;
+  private Long exerciseId;
+  private int numberOfSet;
+  private int restTimeInSecond;
+  private int index;
 
-    // Exercise Information
-    private String key;
+  // Exercise Information
+  private String key;
 
-    public SessionContentDTOWithExerciseKey(SessionContent sessionContent, Exercise exercise) {
-        this.id = sessionContent.getId();
-        this.sessionId = sessionContent.getSessionId();
-        this.exerciseId = sessionContent.getExerciseId();
-        this.numberOfSet = sessionContent.getNumberOfSet();
-        this.restTimeInSecond = sessionContent.getRestTimeInSecond();
-        this.index = sessionContent.getIndex();
+  public SessionContentDTOWithExerciseKey(
+    SessionContent sessionContent,
+    Exercise exercise
+  ) {
+    this.id = sessionContent.getId();
+    this.sessionId = sessionContent.getSessionId();
+    this.exerciseId = sessionContent.getExerciseId();
+    this.numberOfSet = sessionContent.getNumberOfSet();
+    this.restTimeInSecond = sessionContent.getRestTimeInSecond();
+    this.index = sessionContent.getIndex();
 
-        this.key = exercise.getKey();
-    }
+    this.key = exercise.getKey();
+  }
 }
