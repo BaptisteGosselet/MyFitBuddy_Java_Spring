@@ -4,14 +4,12 @@ import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
 import com.platine.myFitBuddy.features.exercices.model.Exercise;
 import com.platine.myFitBuddy.features.exercices.service.ExerciseService;
 import com.platine.myFitBuddy.features.sessionContent.mapper.SessionContentMapper;
-import com.platine.myFitBuddy.features.sessionContent.service.SessionContentService;
-
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContent;
+import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreateForm;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTO;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTOWithExerciseKey;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdateForm;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreateForm;
-
+import com.platine.myFitBuddy.features.sessionContent.service.SessionContentService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,13 +25,24 @@ public class SessionContentControllerImpl implements SessionContentController {
   private final DBUserServiceImpl dbUserService;
 
   @Override
-  public ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(Long sessionId) {
+  public ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(
+    Long sessionId
+  ) {
     List<SessionContentDTOWithExerciseKey> sessionContentsDTO = new ArrayList<>();
-    List<SessionContent> sessionContents = sessionContentService.findByUserIdBySession(sessionId, dbUserService.getCurrentUser());
-    sessionContents.forEach(sessionContent -> {
-      Exercise exercise = ExerciseService.getExerciseById(sessionContent.getExerciseId());
-      sessionContentsDTO.add(new SessionContentDTOWithExerciseKey(sessionContent, exercise));
-    });
+    List<SessionContent> sessionContents = sessionContentService.findByUserIdBySession(
+      sessionId,
+      dbUserService.getCurrentUser()
+    );
+    sessionContents.forEach(
+      sessionContent -> {
+        Exercise exercise = ExerciseService.getExerciseById(
+          sessionContent.getExerciseId()
+        );
+        sessionContentsDTO.add(
+          new SessionContentDTOWithExerciseKey(sessionContent, exercise)
+        );
+      }
+    );
     return ResponseEntity.ok(sessionContentsDTO);
   }
 

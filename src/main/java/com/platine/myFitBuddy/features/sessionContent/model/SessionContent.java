@@ -27,4 +27,20 @@ public class SessionContent {
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
   private DBUser user;
+
+  public SessionContent(
+    Long sessionId,
+    Long exerciseId,
+    int numberOfSet,
+    int restTimeInSecond,
+    int index,
+    DBUser user
+  ) {
+    this.sessionId = sessionId;
+    this.exerciseId = exerciseId;
+    this.numberOfSet = numberOfSet;
+    this.restTimeInSecond = restTimeInSecond;
+    this.index = index;
+    this.user = user;
+  }
 }

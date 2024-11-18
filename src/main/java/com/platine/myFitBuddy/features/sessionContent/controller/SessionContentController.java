@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sessionContent")
 public interface SessionContentController {
   @GetMapping(value = "/{sessionId}", produces = "application/json")
-  ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(@RequestParam("sessionId") Long sessionId);
+  ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(
+    @RequestParam("sessionId") Long sessionId
+  );
 
   @PostMapping(produces = "application/json", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
