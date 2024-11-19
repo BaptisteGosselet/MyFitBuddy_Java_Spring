@@ -12,7 +12,6 @@ import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdate
 import com.platine.myFitBuddy.features.sessionContent.service.SessionContentService;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -79,22 +78,8 @@ public class SessionContentControllerImpl implements SessionContentController {
 
   @Override
   public ResponseEntity<List<SessionContentDTO>> list(
-    Long sessionId,
     List<SessionContentUpdateForm> listSessionToUpdate
   ) {
-    List<SessionContent> res = new ArrayList<>();
-    listSessionToUpdate.forEach(
-      sessionContentUpdateForm ->
-        res.add(
-          sessionContentService.update(
-            sessionContentUpdateForm,
-            sessionId,
-            dbUserService.getCurrentUser()
-          )
-        )
-    );
-    return ResponseEntity.ok(
-      res.stream().map(SessionContentMapper::mapToDTO).collect(Collectors.toList())
-    );
+    return null;
   }
 }
