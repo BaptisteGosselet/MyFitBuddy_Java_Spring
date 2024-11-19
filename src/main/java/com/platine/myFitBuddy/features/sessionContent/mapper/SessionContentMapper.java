@@ -12,6 +12,7 @@ public class SessionContentMapper {
 
   public static SessionContent mapFromCreateForm(
     final SessionContentCreateForm sessionContentCreateForm,
+    final int index,
     final DBUser user
   ) {
     SessionContent sessionContent = new SessionContent();
@@ -19,18 +20,17 @@ public class SessionContentMapper {
     sessionContent.setExerciseId(sessionContentCreateForm.getExerciseId());
     sessionContent.setNumberOfSet(sessionContentCreateForm.getNumberOfSet());
     sessionContent.setRestTimeInSecond(sessionContentCreateForm.getRestTimeInSecond());
-    sessionContent.setIndex(sessionContentCreateForm.getIndex());
+    sessionContent.setIndex(index);
     sessionContent.setUser(user);
     return sessionContent;
   }
 
   public static SessionContent mapFromUpdateForm(
     final SessionContentUpdateForm sessionContentUpdateForm,
-    final Long sessionContentId,
     final DBUser user
   ) {
     SessionContent sessionContent = new SessionContent();
-    sessionContent.setId(sessionContentId);
+    sessionContent.setId(sessionContentUpdateForm.getId());
     sessionContent.setNumberOfSet(sessionContentUpdateForm.getNumberOfSet());
     sessionContent.setRestTimeInSecond(sessionContentUpdateForm.getRestTimeInSecond());
     sessionContent.setIndex(sessionContentUpdateForm.getIndex());
