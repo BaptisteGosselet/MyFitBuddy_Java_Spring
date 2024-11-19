@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public interface SessionContentController {
   @GetMapping(value = "/{sessionId}", produces = "application/json")
   ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(
-    @RequestParam("sessionId") Long sessionId
+    @PathVariable("sessionId") Long sessionId
   );
 
   @PostMapping(produces = "application/json", consumes = "application/json")
@@ -30,7 +30,7 @@ public interface SessionContentController {
   @ResponseStatus(HttpStatus.OK)
   ResponseEntity<SessionContentDTO> update(
     @RequestBody final SessionContentUpdateForm updateForm,
-    @RequestParam("sessionContentId") Long sessionId
+    @PathVariable("sessionContentId") Long sessionId
   );
 
   @DeleteMapping(
@@ -38,7 +38,7 @@ public interface SessionContentController {
     produces = "application/json",
     consumes = "application/json"
   )
-  ResponseEntity<Boolean> delete(@RequestParam("sessionContentId") Long sessionContentId);
+  ResponseEntity<Boolean> delete(@PathVariable("sessionContentId") Long sessionContentId);
 
   @PutMapping(
     value = "/list",
@@ -46,7 +46,6 @@ public interface SessionContentController {
     consumes = "application/json"
   )
   ResponseEntity<List<SessionContentDTO>> list(
-    @RequestParam("sessionId") Long sessionId,
     @RequestBody List<SessionContentUpdateForm> listSessionToUpdate
   );
 }
