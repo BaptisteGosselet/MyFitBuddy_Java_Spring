@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class SessionContentUpdateForm {
+  private Long id;
   private int numberOfSet;
   private int restTimeInSecond;
   private int index;
