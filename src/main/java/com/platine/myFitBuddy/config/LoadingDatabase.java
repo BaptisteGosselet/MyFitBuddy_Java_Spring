@@ -26,7 +26,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-@Profile("!test")
 public class LoadingDatabase implements CommandLineRunner {
   @Autowired
   private DBUserRepository dbUserRepository;
@@ -87,6 +86,14 @@ public class LoadingDatabase implements CommandLineRunner {
         1,
         dbuser
       )
+    for (int i = 0; i < 10; i++) {
+      sessionRepository.save(new FitSession(faker.name().title(), dbuser));
+    }
+    FitSession dummySession = sessionRepository.save(
+      new FitSession("SessionWithContent", dbuser)
+    );
+    Exercise dummyExercise = exerciseRepository.save(
+      new Exercise("TEST", MuscleGroup.SHOULDERS, "EnTesting", "FrTest")
     );
 
     sessionContentRepository.save(

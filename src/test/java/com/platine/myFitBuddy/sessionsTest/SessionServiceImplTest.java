@@ -1,6 +1,7 @@
 package com.platine.myFitBuddy.sessionsTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -129,6 +130,22 @@ public class SessionServiceImplTest {
   }
 
   @Test
+  void updateSessionNotFoundTest() {
+    final long sessionId = 1;
+    SessionUpdateForm updateForm = new SessionUpdateForm(sessionId, "updated session");
+    dummySession.setName("updated session");
+
+    when(sessionRepository.findById(sessionId)).thenReturn(Optional.empty());
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      sessionServiceImpl.update(updateForm, dummyUser);
+    });
+
+    verify(sessionRepository).findById(sessionId);
+    verifyNoMoreInteractions(sessionRepository);
+  }
+
+  @Test
   void deleteTest() {
     final long sessionId = 1;
 
@@ -138,6 +155,20 @@ public class SessionServiceImplTest {
 
     verify(sessionRepository).findById(sessionId);
     verify(sessionRepository).delete(dummySession);
+    verifyNoMoreInteractions(sessionRepository);
+  }
+
+  @Test
+  void deleteSessionNotFoundTest() {
+    final long sessionId = 1;
+
+    when(sessionRepository.findById(sessionId)).thenReturn(Optional.empty());
+
+    assertThrows(IllegalArgumentException.class, () -> {
+      sessionServiceImpl.delete(sessionId, dummyUser);
+    });
+
+    verify(sessionRepository).findById(sessionId);
     verifyNoMoreInteractions(sessionRepository);
   }
 }
