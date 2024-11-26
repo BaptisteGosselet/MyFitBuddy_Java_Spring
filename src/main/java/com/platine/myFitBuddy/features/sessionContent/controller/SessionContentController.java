@@ -35,8 +35,7 @@ public interface SessionContentController {
 
   @DeleteMapping(
     value = "/{sessionContentId}",
-    produces = "application/json",
-    consumes = "application/json"
+    produces = "application/json"
   )
   ResponseEntity<Boolean> delete(@PathVariable("sessionContentId") Long sessionContentId);
 
