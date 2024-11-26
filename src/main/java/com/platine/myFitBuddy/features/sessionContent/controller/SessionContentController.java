@@ -2,7 +2,7 @@ package com.platine.myFitBuddy.features.sessionContent.controller;
 
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreateForm;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTO;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTOWithExerciseKey;
+import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTOWithExercise;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdateForm;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/sessionContent")
 public interface SessionContentController {
   @GetMapping(value = "/{sessionId}", produces = "application/json")
-  ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(
+  ResponseEntity<List<SessionContentDTOWithExercise>> findByUserBySessionId(
     @PathVariable("sessionId") Long sessionId
   );
 

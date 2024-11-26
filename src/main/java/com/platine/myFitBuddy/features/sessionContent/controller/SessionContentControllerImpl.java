@@ -7,7 +7,7 @@ import com.platine.myFitBuddy.features.sessionContent.mapper.SessionContentMappe
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContent;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreateForm;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTO;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTOWithExerciseKey;
+import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTOWithExercise;
 import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdateForm;
 import com.platine.myFitBuddy.features.sessionContent.service.SessionContentService;
 import java.util.ArrayList;
@@ -24,10 +24,10 @@ public class SessionContentControllerImpl implements SessionContentController {
   private final DBUserServiceImpl dbUserService;
 
   @Override
-  public ResponseEntity<List<SessionContentDTOWithExerciseKey>> findByUserBySessionId(
+  public ResponseEntity<List<SessionContentDTOWithExercise>> findByUserBySessionId(
     Long sessionId
   ) {
-    List<SessionContentDTOWithExerciseKey> sessionContentsDTO = new ArrayList<>();
+    List<SessionContentDTOWithExercise> sessionContentsDTO = new ArrayList<>();
     List<SessionContent> sessionContents = sessionContentService.findByUserIdBySession(
       sessionId,
       dbUserService.getCurrentUser()
@@ -38,7 +38,7 @@ public class SessionContentControllerImpl implements SessionContentController {
           sessionContent.getExerciseId()
         );
         sessionContentsDTO.add(
-          new SessionContentDTOWithExerciseKey(sessionContent, exercise)
+          new SessionContentDTOWithExercise(sessionContent, exercise)
         );
       }
     );

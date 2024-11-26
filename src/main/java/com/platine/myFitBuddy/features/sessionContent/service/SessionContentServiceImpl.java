@@ -26,9 +26,10 @@ public class SessionContentServiceImpl implements SessionContentService {
 
   @Override
   public SessionContent create(SessionContentCreateForm createForm, DBUser user) {
-    int maxIndexPlus1 = sessionContentRepository.findMaxIndexBySessionId(createForm.getSessionId()) + 1;
+    int maxIndexPlus1 =
+      sessionContentRepository.findMaxIndexBySessionId(createForm.getSessionId()) + 1;
     return sessionContentRepository.save(
-      SessionContentMapper.mapFromCreateForm(createForm, maxIndexPlus1 ,user)
+      SessionContentMapper.mapFromCreateForm(createForm, maxIndexPlus1, user)
     );
   }
 
