@@ -20,7 +20,7 @@ public class SessionControllerImpl implements SessionController {
 
   @Override
   public ResponseEntity<FitSession> findById(final long sessionId) {
-    DBUser user = new DBUser("username","email","password","role");
+    DBUser user = dbUserService.getCurrentUser();
     Optional<FitSession> sessionOptional = sessionService.findById(sessionId, user);
     return sessionOptional
       .map(ResponseEntity::ok)

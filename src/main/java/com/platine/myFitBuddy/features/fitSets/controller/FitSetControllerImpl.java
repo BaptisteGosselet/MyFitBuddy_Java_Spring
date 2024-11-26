@@ -31,7 +31,7 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
-  @GetMapping(value = "/{recordId}", produces = "application/json")
+  @GetMapping(value = "/record/{recordId}", produces = "application/json")
   public ResponseEntity<List<FitSet>> getSetsByRecordId(
     @PathVariable("recordId") long recordId
   ) {
