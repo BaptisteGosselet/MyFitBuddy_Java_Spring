@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface SessionContentRepository extends JpaRepository<SessionContent, Long> {
   List<SessionContent> findSessionContentBySessionIdAndUser(Long sessionId, DBUser user);
 
-  void deleteBySessionIdAndUser(Long sessionId, DBUser user);
+  void deleteByIdAndUser(Long id, DBUser user);
 
   @Query("SELECT MAX(s.index) FROM SessionContent s WHERE s.sessionId = :sessionId")
   int findMaxIndexBySessionId(@Param("sessionId") Long sessionId);

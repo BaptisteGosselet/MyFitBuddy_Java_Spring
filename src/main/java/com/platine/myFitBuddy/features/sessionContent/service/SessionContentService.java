@@ -17,5 +17,5 @@ public interface SessionContentService {
     DBUser user
   );
 
-  void delete(final Long sessionId, final DBUser user);
+  void delete(final Long id, final DBUser user);
 }

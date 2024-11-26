@@ -4,14 +4,11 @@ import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
 import com.platine.myFitBuddy.features.exercices.model.Exercise;
 import com.platine.myFitBuddy.features.exercices.service.ExerciseService;
 import com.platine.myFitBuddy.features.sessionContent.mapper.SessionContentMapper;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContent;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentCreateForm;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTO;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentDTOWithExercise;
-import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdateForm;
+import com.platine.myFitBuddy.features.sessionContent.model.*;
 import com.platine.myFitBuddy.features.sessionContent.service.SessionContentService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,6 +77,19 @@ public class SessionContentControllerImpl implements SessionContentController {
   public ResponseEntity<List<SessionContentDTO>> list(
     List<SessionContentUpdateForm> listSessionToUpdate
   ) {
-    return null;
+    List<SessionContent> res = new ArrayList<>();
+    listSessionToUpdate.forEach(
+      sessionContentUpdateForm ->
+        res.add(
+          sessionContentService.update(
+            sessionContentUpdateForm,
+            sessionContentUpdateForm.getId(),
+            dbUserService.getCurrentUser()
+          )
+        )
+    );
+    return ResponseEntity.ok(
+      res.stream().map(SessionContentMapper::mapToDTO).collect(Collectors.toList())
+    );
   }
 }

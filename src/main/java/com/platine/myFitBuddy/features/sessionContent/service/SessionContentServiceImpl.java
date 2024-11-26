@@ -46,7 +46,7 @@ public class SessionContentServiceImpl implements SessionContentService {
   }
 
   @Override
-  public void delete(Long sessionId, DBUser user) {
-    sessionContentRepository.deleteBySessionIdAndUser(sessionId, user);
+  public void delete(Long id, DBUser user) {
+    sessionContentRepository.deleteByIdAndUser(id, user);
   }
 }
