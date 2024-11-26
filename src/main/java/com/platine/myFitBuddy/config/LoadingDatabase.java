@@ -20,11 +20,13 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
+@Profile("!test")
 public class LoadingDatabase implements CommandLineRunner {
   @Autowired
   private DBUserRepository dbUserRepository;
