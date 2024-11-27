@@ -1,6 +1,8 @@
 package com.platine.myFitBuddy.features.fitSets.service;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
+import com.platine.myFitBuddy.features.exercices.model.Exercise;
+import com.platine.myFitBuddy.features.exercices.repository.ExerciseRepository;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitRecords.repository.FitRecordRepository;
 import com.platine.myFitBuddy.features.fitSets.model.FitSet;
@@ -24,6 +26,9 @@ public class FitSetServiceImpl implements FitSetService {
   @Autowired
   private final FitRecordRepository fitRecordRepository;
 
+  @Autowired
+  private final ExerciseRepository exerciseRepository;
+
   @Override
   public Optional<FitSet> getSetById(long setId, DBUser user) {
     return fitSetRepository
@@ -45,12 +50,16 @@ public class FitSetServiceImpl implements FitSetService {
         () -> new IllegalArgumentException("Record not found or user not authorized")
       );
 
+    Exercise exercise = exerciseRepository
+      .findById(form.getIdExercise())
+      .orElseThrow(() -> new IllegalArgumentException("Exercise not found"));
+
     FitSet newSet = new FitSet(
+      record,
+      exercise,
       form.getNbOrder(),
       form.getNbRep(),
-      form.getWeight(),
-      form.getFeeling(),
-      record
+      form.getWeight()
     );
     return fitSetRepository.save(newSet);
   }
@@ -70,9 +79,6 @@ public class FitSetServiceImpl implements FitSetService {
           }
           if (form.getWeight() != null) {
             set.setWeight(form.getWeight());
-          }
-          if (form.getFeeling() != null) {
-            set.setFeeling(form.getFeeling());
           }
           return fitSetRepository.save(set);
         }

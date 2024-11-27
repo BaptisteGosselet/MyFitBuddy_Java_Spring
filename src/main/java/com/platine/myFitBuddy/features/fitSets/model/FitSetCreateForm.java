@@ -25,8 +25,4 @@ public class FitSetCreateForm {
 
   @NotNull
   private Integer weight;
-
-  @Min(value = MyUtils.SET_FEELING_MIN)
-  @Max(value = MyUtils.SET_FEELING_MAX)
-  private Integer feeling;
 }

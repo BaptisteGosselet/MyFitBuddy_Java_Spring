@@ -12,12 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class FitSetUpdateForm {
   private Long idFitSet;
-  private Long idExercise;
   private Integer nbOrder;
   private Integer nbRep;
   private Integer weight;
-
-  @Min(value = MyUtils.SET_FEELING_MIN)
-  @Max(value = MyUtils.SET_FEELING_MAX)
-  private Integer feeling;
 }
