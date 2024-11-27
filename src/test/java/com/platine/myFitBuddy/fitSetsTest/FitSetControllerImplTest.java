@@ -7,6 +7,8 @@ import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitSets.controller.FitSetControllerImpl;
 import com.platine.myFitBuddy.features.fitSets.model.FitSet;
+import com.platine.myFitBuddy.features.fitSets.model.FitSetCreateForm;
+import com.platine.myFitBuddy.features.fitSets.model.FitSetUpdateForm;
 import com.platine.myFitBuddy.features.fitSets.service.FitSetService;
 import com.platine.myFitBuddy.features.fitSets.service.FitSetServiceImpl;
 import org.junit.jupiter.api.Disabled;
@@ -19,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -29,9 +32,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -76,7 +78,6 @@ public class FitSetControllerImplTest {
   }
 
   @Test
-  @Disabled
   void getSetByIdNotFoundTest() throws Exception {
     long setId = 1L;
 
@@ -124,26 +125,94 @@ public class FitSetControllerImplTest {
   }
 
   @Test
-  @Disabled
-  void addSetToSessionTest() {}
+  void addSetToSessionTest() throws Exception{
+    DBUser user = new DBUser("username","email","password","role");
+    FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L,1L,1,1,1,1);
+    FitSet fitSetExpected = new FitSet(fitSetCreateForm.getNbOrder(),fitSetCreateForm.getNbRep(),fitSetCreateForm.getWeight(),fitSetCreateForm.getFeeling(),new FitRecord("name",user));
+
+    when(fitSetService.addSetToSession(any(),any())).thenReturn(fitSetExpected);
+
+    MvcResult result = this.mockMvc.perform(post("/sets/create").contentType(MediaType.APPLICATION_JSON).content(fitSetCreateForm.toString())).andExpect(status().isCreated()).andReturn();
+
+    String json = result.getResponse().getContentAsString();
+    FitSet FitSetFromController = objectMapper.readValue(json, new TypeReference<>() {});
+
+    verify(fitSetService).addSetToSession(any(),any());
+    assertEquals(fitSetExpected.getId(),FitSetFromController.getId());
+    assertEquals(fitSetExpected.getNbOrder(),FitSetFromController.getNbOrder());
+    assertEquals(fitSetExpected.getNbRep(),FitSetFromController.getNbRep());
+    assertEquals(fitSetExpected.getWeight(),FitSetFromController.getWeight());
+    assertEquals(fitSetExpected.getRecord().getName(),FitSetFromController.getRecord().getName());
+
+  }
 
   @Test
-  @Disabled
-  void addSetToSessionWrongUserTest() {}
+  void addSetToSessionWrongUserTest() throws Exception {
+
+    FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L,1L,1,1,1,1);
+
+    when(fitSetService.addSetToSession(any(),any())).thenThrow(IllegalArgumentException.class);
+
+    this.mockMvc.perform(post("/sets/create").contentType(MediaType.APPLICATION_JSON).content(fitSetCreateForm.toString())).andExpect(status().isBadRequest());
+
+    verify(fitSetService).addSetToSession(any(),any());
+  }
 
   @Test
-  @Disabled
-  void updateSetTest() {}
+  void updateSetTest() throws Exception {
+    DBUser user = new DBUser("username","email","password","role");
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+    FitSet fitSetExpected = new FitSet(fitSetUpdateForm.getNbOrder(),fitSetUpdateForm.getNbRep(),fitSetUpdateForm.getWeight(),fitSetUpdateForm.getFeeling(),new FitRecord("name",user));
+
+    when(fitSetService.updateSet(any(),any())).thenReturn(fitSetExpected);
+
+    MvcResult result = this.mockMvc.perform(put("/sets/update").contentType(MediaType.APPLICATION_JSON).content(fitSetUpdateForm.toString())).andExpect(status().isOk()).andReturn();
+
+    String json = result.getResponse().getContentAsString();
+    FitSet FitSetFromController = objectMapper.readValue(json, new TypeReference<>() {});
+
+    verify(fitSetService).updateSet(any(),any());
+    assertEquals(fitSetExpected.getId(),FitSetFromController.getId());
+    assertEquals(fitSetExpected.getNbOrder(),FitSetFromController.getNbOrder());
+    assertEquals(fitSetExpected.getNbRep(),FitSetFromController.getNbRep());
+    assertEquals(fitSetExpected.getWeight(),FitSetFromController.getWeight());
+    assertEquals(fitSetExpected.getRecord().getName(),FitSetFromController.getRecord().getName());
+  }
 
   @Test
-  @Disabled
-  void updateSetWrongUserTest() {}
+  void updateSetWrongUserTest() throws Exception {
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+
+    when(fitSetService.updateSet(any(),any())).thenThrow(IllegalArgumentException.class);
+
+    this.mockMvc.perform(put("/sets/update").contentType(MediaType.APPLICATION_JSON).content(fitSetUpdateForm.toString())).andExpect(status().isBadRequest());
+
+    verify(fitSetService).updateSet(any(),any());
+  }
 
   @Test
-  @Disabled
-  void deleteSetTest() {}
+  void deleteSetTest() throws Exception {
+    long setId = 1L;
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+
+    doNothing().when(fitSetService).deleteSet(anyLong(),any());
+
+    this.mockMvc.perform(delete("/sets/delete/"+setId).contentType(MediaType.APPLICATION_JSON).content(fitSetUpdateForm.toString())).andExpect(status().isOk());
+
+    verify(fitSetService).deleteSet(anyLong(),any());
+
+  }
 
   @Test
-  @Disabled
-  void deleteSetWrongUserTest() {}
+  void deleteSetWrongUserTest() throws Exception {
+    long setId = 1L;
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+
+    doThrow(IllegalArgumentException.class).when(fitSetService).deleteSet(anyLong(),any());
+
+    this.mockMvc.perform(delete("/sets/delete/"+setId).contentType(MediaType.APPLICATION_JSON).content(fitSetUpdateForm.toString())).andExpect(status().isBadRequest());
+
+    verify(fitSetService).deleteSet(anyLong(),any());
+
+  }
 }
