@@ -1,5 +1,6 @@
 package com.platine.myFitBuddy.features.fitSets.model;
 
+import com.platine.myFitBuddy.features.exercices.model.Exercise;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.utils.MyUtils;
 import jakarta.persistence.Entity;
@@ -20,29 +21,29 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FitSet {
 
-  public FitSet(int nbOrder, int nbRep, int weight, int feeling, FitRecord record) {
+  public FitSet(FitRecord record, Exercise exercise, int nbOrder, int nbRep, int weight) {
+    this.record = record;
+    this.exercise = exercise;
     this.nbOrder = nbOrder;
     this.nbRep = nbRep;
     this.weight = weight;
-    this.feeling = feeling;
-    this.record = record;
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
+  @ManyToOne
+  @JoinColumn(name = "record_id", nullable = false)
+  private FitRecord record;
+
+  @ManyToOne
+  @JoinColumn(name = "exercise_id", nullable = false)
+  private Exercise exercise;
+
   private int nbOrder;
 
   private int nbRep;
 
   private int weight;
-
-  @Min(value = MyUtils.SET_FEELING_MIN)
-  @Max(value = MyUtils.SET_FEELING_MAX)
-  private int feeling;
-
-  @ManyToOne
-  @JoinColumn(name = "record_id", nullable = false)
-  private FitRecord record;
 }

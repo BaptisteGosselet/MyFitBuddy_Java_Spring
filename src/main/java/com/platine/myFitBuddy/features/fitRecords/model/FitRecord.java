@@ -38,4 +38,5 @@ public class FitRecord {
   @ManyToOne
   @JoinColumn(name = "user_id", nullable = false)
   private DBUser user;
+
 }
