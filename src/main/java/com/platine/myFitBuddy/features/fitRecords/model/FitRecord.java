@@ -39,4 +39,5 @@ public class FitRecord {
   @JoinColumn(name = "user_id", nullable = false)
   private DBUser user;
 
+  private String feelingNote;
 }

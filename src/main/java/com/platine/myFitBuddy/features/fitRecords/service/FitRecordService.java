@@ -12,5 +12,7 @@ public interface FitRecordService {
 
   FitRecord createRecord(final long sessionId, final DBUser user);
 
+  FitRecord setFeelingNote(final long sessionId, final String note, final DBUser user);
+
   void deleteRecord(final long recordId, final DBUser user);
 }
