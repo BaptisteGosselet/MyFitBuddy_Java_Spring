@@ -37,7 +37,6 @@ public class FitRecordControllerImplTest {
   @Disabled
   void setFeelingNote() {}
 
-
   @Test
   @Disabled
   void deleteRecordTest() {}
