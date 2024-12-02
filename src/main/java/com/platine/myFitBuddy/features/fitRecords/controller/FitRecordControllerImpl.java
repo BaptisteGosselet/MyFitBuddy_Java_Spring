@@ -34,14 +34,17 @@ public class FitRecordControllerImpl implements FitRecordController {
   }
 
   @Override
-  public ResponseEntity<FitRecord> createRecord(@RequestParam long sessionId) {
+  public ResponseEntity<FitRecord> createRecord(@PathVariable long sessionId) {
     DBUser currentUser = dbUserService.getCurrentUser();
     FitRecord newRecord = recordService.createRecord(sessionId, currentUser);
     return ResponseEntity.ok(newRecord);
   }
 
   @Override
-  public ResponseEntity<FitRecord> setFeelingNote(@RequestParam long sessionId, final String note) {
+  public ResponseEntity<FitRecord> setFeelingNote(
+    @RequestParam long sessionId,
+    final String note
+  ) {
     DBUser currentUser = dbUserService.getCurrentUser();
     FitRecord newRecord = recordService.setFeelingNote(sessionId, note, currentUser);
     return ResponseEntity.ok(newRecord);

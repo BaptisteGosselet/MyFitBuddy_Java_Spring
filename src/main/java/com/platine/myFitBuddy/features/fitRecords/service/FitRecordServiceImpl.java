@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Transactional
 @RequiredArgsConstructor
 public class FitRecordServiceImpl implements FitRecordService {
-
   @Autowired
   private final FitRecordRepository recordRepository;
 
@@ -53,9 +52,9 @@ public class FitRecordServiceImpl implements FitRecordService {
     FitRecord record = recordRepository
       .findById(recordId)
       .filter(r -> r.getUser().equals(user))
-      .orElseThrow(() -> new IllegalArgumentException(
-        "Enregistrement non trouvé ou non autorisé."
-      ));
+      .orElseThrow(
+        () -> new IllegalArgumentException("Enregistrement non trouvé ou non autorisé.")
+      );
 
     record.setFeelingNote(note);
     return recordRepository.save(record);
