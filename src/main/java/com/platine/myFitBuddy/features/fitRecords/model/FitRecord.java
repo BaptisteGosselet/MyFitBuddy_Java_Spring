@@ -1,5 +1,6 @@
 package com.platine.myFitBuddy.features.fitRecords.model;
 
+import autovalue.shaded.org.jetbrains.annotations.NotNull;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class FitRecord {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotBlank
+  @NotNull
   private LocalDate date;
 
   @NotBlank
