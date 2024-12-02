@@ -7,7 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class MyFitBuddyApplicationTests {
 
-  //@Test
-  //@Disabled
-  //void contextLoads() {}
+  @Test
+  void contextLoads() {}
 }

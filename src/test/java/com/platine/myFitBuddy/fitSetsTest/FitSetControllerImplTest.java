@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
+import com.platine.myFitBuddy.features.exercices.model.Exercise;
+import com.platine.myFitBuddy.features.exercices.model.MuscleGroup;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitSets.controller.FitSetControllerImpl;
 import com.platine.myFitBuddy.features.fitSets.model.FitSet;
@@ -59,7 +61,7 @@ public class FitSetControllerImplTest {
   void getSetByIdTest() throws Exception {
     long setId = 1L;
     DBUser user = new DBUser("username","email","password","role");
-    FitSet fitSetExpected = new FitSet(1,1,1,1,new FitRecord("name",user));
+    FitSet fitSetExpected = new FitSet(new FitRecord("name",user),new Exercise("key", MuscleGroup.ARMS,"en","fr"),1,1,1);
 
     when(fitSetService.getSetById(anyLong(),any())).thenReturn(Optional.of(fitSetExpected));
 
@@ -93,7 +95,7 @@ public class FitSetControllerImplTest {
 
     long recordId = 1L;
     DBUser user = new DBUser("username","email","password","role");
-    List<FitSet> fitSetsExpected = List.of(new FitSet(1,1,1,1,new FitRecord("name",user)),new FitSet(2,2,2,2,new FitRecord("name",user)));
+    List<FitSet> fitSetsExpected = List.of(new FitSet(new FitRecord("name",user),new Exercise("key", MuscleGroup.ARMS,"en","fr"),1,1,1),new FitSet(new FitRecord("name",user),new Exercise("key", MuscleGroup.ARMS,"en","fr"),2,2,2));
 
     when(fitSetService.getSetsbyUser(any())).thenReturn(fitSetsExpected);
 
@@ -127,8 +129,8 @@ public class FitSetControllerImplTest {
   @Test
   void addSetToSessionTest() throws Exception{
     DBUser user = new DBUser("username","email","password","role");
-    FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L,1L,1,1,1,1);
-    FitSet fitSetExpected = new FitSet(fitSetCreateForm.getNbOrder(),fitSetCreateForm.getNbRep(),fitSetCreateForm.getWeight(),fitSetCreateForm.getFeeling(),new FitRecord("name",user));
+    FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L,1L,1,1,1);
+    FitSet fitSetExpected = new FitSet(new FitRecord("name",user), new Exercise("key", MuscleGroup.ARMS,"en","fr"), fitSetCreateForm.getNbOrder(),fitSetCreateForm.getNbRep(),fitSetCreateForm.getWeight());
 
     when(fitSetService.addSetToSession(any(),any())).thenReturn(fitSetExpected);
 
@@ -149,7 +151,7 @@ public class FitSetControllerImplTest {
   @Test
   void addSetToSessionWrongUserTest() throws Exception {
 
-    FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L,1L,1,1,1,1);
+    FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L,1L,1,1,1);
 
     when(fitSetService.addSetToSession(any(),any())).thenThrow(IllegalArgumentException.class);
 
@@ -161,8 +163,8 @@ public class FitSetControllerImplTest {
   @Test
   void updateSetTest() throws Exception {
     DBUser user = new DBUser("username","email","password","role");
-    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
-    FitSet fitSetExpected = new FitSet(fitSetUpdateForm.getNbOrder(),fitSetUpdateForm.getNbRep(),fitSetUpdateForm.getWeight(),fitSetUpdateForm.getFeeling(),new FitRecord("name",user));
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1,1,1);
+    FitSet fitSetExpected = new FitSet(new FitRecord("name",user), new Exercise("key", MuscleGroup.ARMS,"en","fr"), fitSetUpdateForm.getNbOrder(),fitSetUpdateForm.getNbRep(),fitSetUpdateForm.getWeight());
 
     when(fitSetService.updateSet(any(),any())).thenReturn(fitSetExpected);
 
@@ -181,7 +183,7 @@ public class FitSetControllerImplTest {
 
   @Test
   void updateSetWrongUserTest() throws Exception {
-    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1,1,1);
 
     when(fitSetService.updateSet(any(),any())).thenThrow(IllegalArgumentException.class);
 
@@ -193,7 +195,7 @@ public class FitSetControllerImplTest {
   @Test
   void deleteSetTest() throws Exception {
     long setId = 1L;
-    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1,1,1);
 
     doNothing().when(fitSetService).deleteSet(anyLong(),any());
 
@@ -206,7 +208,7 @@ public class FitSetControllerImplTest {
   @Test
   void deleteSetWrongUserTest() throws Exception {
     long setId = 1L;
-    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1L,1,1,1,1);
+    FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L,1,1,1);
 
     doThrow(IllegalArgumentException.class).when(fitSetService).deleteSet(anyLong(),any());
 
