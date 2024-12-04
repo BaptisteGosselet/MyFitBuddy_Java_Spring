@@ -18,7 +18,7 @@ public interface FitSetController {
   @GetMapping(value = "/{setId}", produces = "application/json")
   ResponseEntity<FitSet> getSetById(@PathVariable("setId") final long setId);
 
-  @GetMapping(value = "/{recordId}", produces = "application/json")
+  @GetMapping(value = "/record/{recordId}", produces = "application/json")
   ResponseEntity<List<FitSet>> getSetsByRecordId(
     @PathVariable("recordId") final long recordId
   );

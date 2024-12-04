@@ -2,6 +2,7 @@ package com.platine.myFitBuddy.features.fitRecords.controller;
 
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

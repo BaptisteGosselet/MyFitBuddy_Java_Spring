@@ -1,5 +1,21 @@
 # myFitBuddy
 
+## Lancer le projet en prod
+
+1. Modifier la configuration application.yml dans le dossier src/main/resources
+
+```sh
+spring.profiles.active=prod
+```
+
+
+
+2. Lancer l'API
+
+```sh
+mvn spring-boot:run
+```
+
 ## Lancer le projet en local
 
 1. Lancer la BDD dockerisée
@@ -9,13 +25,19 @@
 docker-compose up -d
 ```
 
-2. Lancer l'API
+2. Modifier la configuration application.yml dans le dossier src/main/resources
+
+```sh
+spring.profiles.active=local
+```
+
+3. Lancer l'API
 
 ```sh
 mvn spring-boot:run
 ```
 
-3. Accéder à Swagger UI
+4. Accéder à Swagger UI
 
 `http://localhost:8080/swagger-ui/index.html` (Adapter le port si nécessaire).
 

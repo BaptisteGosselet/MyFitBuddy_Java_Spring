@@ -1,5 +1,6 @@
 package com.platine.myFitBuddy.features.dbUsers.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,10 +12,7 @@ import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +24,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@Data
 public class DBUser implements UserDetails {
 
   public DBUser(String username, String email, String password, String role) {
@@ -63,6 +63,7 @@ public class DBUser implements UserDetails {
   @Column(name = "updated_at")
   private Date updatedAt;
 
+  @JsonDeserialize(using = CustomAuthorityDeserializer.class)
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     if (role == null || role.isEmpty()) {
