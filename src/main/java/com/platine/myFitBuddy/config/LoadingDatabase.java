@@ -85,7 +85,8 @@ public class LoadingDatabase implements CommandLineRunner {
         150,
         1,
         dbuser
-      ));
+      )
+    );
 
     FitSession dummySession = sessionRepository.save(
       new FitSession("SessionWithContent", dbuser)

@@ -12,7 +12,6 @@ import jakarta.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

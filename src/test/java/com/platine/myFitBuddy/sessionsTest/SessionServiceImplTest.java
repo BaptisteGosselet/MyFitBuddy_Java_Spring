@@ -137,9 +137,12 @@ public class SessionServiceImplTest {
 
     when(sessionRepository.findById(sessionId)).thenReturn(Optional.empty());
 
-    assertThrows(IllegalArgumentException.class, () -> {
-      sessionServiceImpl.update(updateForm, dummyUser);
-    });
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        sessionServiceImpl.update(updateForm, dummyUser);
+      }
+    );
 
     verify(sessionRepository).findById(sessionId);
     verifyNoMoreInteractions(sessionRepository);
@@ -164,9 +167,12 @@ public class SessionServiceImplTest {
 
     when(sessionRepository.findById(sessionId)).thenReturn(Optional.empty());
 
-    assertThrows(IllegalArgumentException.class, () -> {
-      sessionServiceImpl.delete(sessionId, dummyUser);
-    });
+    assertThrows(
+      IllegalArgumentException.class,
+      () -> {
+        sessionServiceImpl.delete(sessionId, dummyUser);
+      }
+    );
 
     verify(sessionRepository).findById(sessionId);
     verifyNoMoreInteractions(sessionRepository);

@@ -1,10 +1,17 @@
 package com.platine.myFitBuddy.exercisesTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.platine.myFitBuddy.features.exercices.model.Exercise;
 import com.platine.myFitBuddy.features.exercices.model.MuscleGroup;
 import com.platine.myFitBuddy.features.exercices.repository.ExerciseRepository;
 import com.platine.myFitBuddy.features.exercices.service.ExerciseServiceImpl;
 import com.platine.myFitBuddy.utils.MyUtils;
+import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,14 +23,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ExerciseServiceImplTest {
@@ -37,33 +36,67 @@ public class ExerciseServiceImplTest {
   void findByKeyAndMuscleGroupTest() {
     String key = "key";
     MuscleGroup muscleGroup = MuscleGroup.ARMS;
-    Pageable pageable = PageRequest.of(0,3);
-    Page<Exercise> pageExerciseExpected = new PageImpl<>(List.of(new Exercise(key,muscleGroup,"en","fr"),new Exercise(key,muscleGroup,"EN","FR")),pageable,2);
+    Pageable pageable = PageRequest.of(0, 3);
+    Page<Exercise> pageExerciseExpected = new PageImpl<>(
+      List.of(
+        new Exercise(key, muscleGroup, "en", "fr"),
+        new Exercise(key, muscleGroup, "EN", "FR")
+      ),
+      pageable,
+      2
+    );
 
-    when(exerciseRepository.findByKeyAndMuscleGroup(MyUtils.normalize(key),muscleGroup,pageable)).thenReturn(pageExerciseExpected);
+    when(
+        exerciseRepository.findByKeyAndMuscleGroup(
+          MyUtils.normalize(key),
+          muscleGroup,
+          pageable
+        )
+      )
+      .thenReturn(pageExerciseExpected);
 
-    Page<Exercise> exerciseFromService = exerciseServiceImpl.findByKeyAndMuscleGroup(key,muscleGroup,pageable);
+    Page<Exercise> exerciseFromService = exerciseServiceImpl.findByKeyAndMuscleGroup(
+      key,
+      muscleGroup,
+      pageable
+    );
 
-    assertEquals(pageExerciseExpected.getTotalElements(),exerciseFromService.getTotalElements());
-    for(int i = 0;i<pageExerciseExpected.getTotalElements();i++){
-      assertEquals(pageExerciseExpected.getContent().get(i).getKey(),exerciseFromService.getContent().get(i).getKey());
-      assertEquals(pageExerciseExpected.getContent().get(i).getMuscleGroup(),exerciseFromService.getContent().get(i).getMuscleGroup());
-      assertEquals(pageExerciseExpected.getContent().get(i).getLabelEn(),exerciseFromService.getContent().get(i).getLabelEn());
-      assertEquals(pageExerciseExpected.getContent().get(i).getLabelFr(),exerciseFromService.getContent().get(i).getLabelFr());
+    assertEquals(
+      pageExerciseExpected.getTotalElements(),
+      exerciseFromService.getTotalElements()
+    );
+    for (int i = 0; i < pageExerciseExpected.getTotalElements(); i++) {
+      assertEquals(
+        pageExerciseExpected.getContent().get(i).getKey(),
+        exerciseFromService.getContent().get(i).getKey()
+      );
+      assertEquals(
+        pageExerciseExpected.getContent().get(i).getMuscleGroup(),
+        exerciseFromService.getContent().get(i).getMuscleGroup()
+      );
+      assertEquals(
+        pageExerciseExpected.getContent().get(i).getLabelEn(),
+        exerciseFromService.getContent().get(i).getLabelEn()
+      );
+      assertEquals(
+        pageExerciseExpected.getContent().get(i).getLabelFr(),
+        exerciseFromService.getContent().get(i).getLabelFr()
+      );
     }
   }
 
   @Test
   void getExerciseByIdTest() {
     long exerciseId = 1L;
-    Exercise exerciseExpected = new Exercise("key",MuscleGroup.ARMS,"en","fr");
+    Exercise exerciseExpected = new Exercise("key", MuscleGroup.ARMS, "en", "fr");
 
-    when(exerciseRepository.findById(exerciseId)).thenReturn(Optional.of(exerciseExpected));
+    when(exerciseRepository.findById(exerciseId))
+      .thenReturn(Optional.of(exerciseExpected));
 
     Exercise exerciseFromService = exerciseServiceImpl.getExerciseById(exerciseId);
 
     verify(exerciseRepository).findById(exerciseId);
-    assertEquals(exerciseExpected,exerciseFromService);
+    assertEquals(exerciseExpected, exerciseFromService);
   }
 
   @Test
@@ -72,9 +105,12 @@ public class ExerciseServiceImplTest {
 
     when(exerciseRepository.findById(exerciseId)).thenReturn(Optional.empty());
 
-    assertThrows(RuntimeException.class, () -> {
-      exerciseServiceImpl.getExerciseById(exerciseId);
-    });
+    assertThrows(
+      RuntimeException.class,
+      () -> {
+        exerciseServiceImpl.getExerciseById(exerciseId);
+      }
+    );
 
     verify(exerciseRepository).findById(exerciseId);
   }
