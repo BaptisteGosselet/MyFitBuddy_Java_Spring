@@ -133,7 +133,7 @@ public class FitSetControllerImplTest {
     FitSet fitSetExpected = new FitSet(new FitRecord("name",user), new Exercise("key", MuscleGroup.ARMS,"en","fr"), fitSetCreateForm.getNbOrder(),fitSetCreateForm.getNbRep(),fitSetCreateForm.getWeight());
 
     when(fitSetService.addSetToSession(any(),any())).thenReturn(fitSetExpected);
-
+    System.out.println(fitSetCreateForm.toString());
     MvcResult result = this.mockMvc.perform(post("/sets/create").contentType(MediaType.APPLICATION_JSON).content(fitSetCreateForm.toString())).andExpect(status().isCreated()).andReturn();
 
     String json = result.getResponse().getContentAsString();
