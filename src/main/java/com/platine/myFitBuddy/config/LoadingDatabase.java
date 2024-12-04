@@ -88,13 +88,6 @@ public class LoadingDatabase implements CommandLineRunner {
       )
     );
 
-    FitSession dummySession = sessionRepository.save(
-      new FitSession("SessionWithContent", dbuser)
-    );
-    Exercise dummyExercise = exerciseRepository.save(
-      new Exercise("TEST", MuscleGroup.SHOULDERS, "EnTesting", "FrTest")
-    );
-
     sessionContentRepository.save(
       new SessionContent(
         sessionA.getId(),
