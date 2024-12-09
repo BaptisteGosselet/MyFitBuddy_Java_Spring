@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,8 @@ public class FitRecordServiceImpl implements FitRecordService {
   @Autowired
   private final SessionRepository sessionRepository;
 
+  private final Sort SORT = Sort.by(Sort.Order.desc("date"));
+
   @Override
   public Optional<FitRecord> getRecordById(long recordId, DBUser user) {
     return recordRepository
@@ -30,7 +33,7 @@ public class FitRecordServiceImpl implements FitRecordService {
 
   @Override
   public List<FitRecord> getRecordsOfUser(DBUser user) {
-    return recordRepository.findByUser(user);
+    return recordRepository.findByUser(user, SORT);
   }
 
   @Override
