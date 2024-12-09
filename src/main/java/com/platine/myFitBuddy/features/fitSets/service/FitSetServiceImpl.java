@@ -30,19 +30,29 @@ public class FitSetServiceImpl implements FitSetService {
   private final ExerciseRepository exerciseRepository;
 
   @Override
-  public Optional<FitSet> getSetById(long setId, DBUser user) {
+  public Optional<FitSet> getSetById(final long setId, final DBUser user) {
     return fitSetRepository
       .findById(setId)
       .filter(set -> set.getRecord().getUser().equals(user));
   }
 
   @Override
-  public List<FitSet> getSetsbyUser(DBUser user) {
+  public List<FitSet> getSetsbyUser(final DBUser user) {
     return fitSetRepository.findAllByRecordUser(user);
   }
 
   @Override
-  public FitSet addSetToSession(FitSetCreateForm form, DBUser user) {
+  public List<FitSet> getSetsbyRecordId(final long recordId, final DBUser user) {
+    return fitSetRepository.findAllByRecordIdAndRecordUser(recordId, user);
+  }
+
+  @Override
+  public List<FitSet> getSetsbyExerciseId(final long exerciseId, final DBUser user) {
+    return fitSetRepository.findAllByExerciseIdAndRecordUser(exerciseId, user);
+  }
+
+  @Override
+  public FitSet addSetToSession(FitSetCreateForm form, final DBUser user) {
     FitRecord record = fitRecordRepository
       .findById(form.getIdRecord())
       .filter(r -> r.getUser().equals(user))
@@ -65,7 +75,7 @@ public class FitSetServiceImpl implements FitSetService {
   }
 
   @Override
-  public FitSet updateSet(FitSetUpdateForm form, DBUser user) {
+  public FitSet updateSet(FitSetUpdateForm form, final DBUser user) {
     return fitSetRepository
       .findById(form.getIdFitSet())
       .filter(set -> set.getRecord().getUser().equals(user))
@@ -89,7 +99,7 @@ public class FitSetServiceImpl implements FitSetService {
   }
 
   @Override
-  public void deleteSet(long idSet, DBUser user) {
+  public void deleteSet(long idSet, final DBUser user) {
     fitSetRepository
       .findById(idSet)
       .filter(set -> set.getRecord().getUser().equals(user))

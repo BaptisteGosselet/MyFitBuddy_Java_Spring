@@ -20,7 +20,6 @@ public class FitSetControllerImpl implements FitSetController {
   private final DBUserServiceImpl dbUserService;
 
   @Override
-  @GetMapping(value = "/{setId}", produces = "application/json")
   public ResponseEntity<FitSet> getSetById(@PathVariable("setId") long setId) {
     DBUser user = dbUserService.getCurrentUser();
 
@@ -31,13 +30,12 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
-  @GetMapping(value = "/record/{recordId}", produces = "application/json")
   public ResponseEntity<List<FitSet>> getSetsByRecordId(
     @PathVariable("recordId") long recordId
   ) {
     DBUser user = dbUserService.getCurrentUser();
 
-    List<FitSet> fitSets = fitSetService.getSetsbyUser(user);
+    List<FitSet> fitSets = fitSetService.getSetsbyRecordId(recordId, user);
     if (fitSets.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -45,7 +43,19 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
-  @PostMapping(value = "/create", produces = "application/json")
+  public ResponseEntity<List<FitSet>> getSetsByExerciseId(
+    @PathVariable("exerciseId") final long exerciseId
+  ) {
+    DBUser user = dbUserService.getCurrentUser();
+
+    List<FitSet> fitSets = fitSetService.getSetsbyExerciseId(exerciseId, user);
+    if (fitSets.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    return ResponseEntity.ok(fitSets);
+  }
+
+  @Override
   public ResponseEntity<FitSet> addSetToSession(
     @RequestBody final FitSetCreateForm form
   ) {
@@ -60,7 +70,6 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
-  @PutMapping(value = "/update", produces = "application/json")
   public ResponseEntity<FitSet> updateSet(@RequestBody final FitSetUpdateForm form) {
     DBUser user = dbUserService.getCurrentUser();
 
@@ -73,7 +82,6 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
-  @DeleteMapping(value = "/delete/{idSet}", produces = "application/json")
   public ResponseEntity<Boolean> deleteSet(@PathVariable("idSet") final long idSet) {
     DBUser user = dbUserService.getCurrentUser();
 

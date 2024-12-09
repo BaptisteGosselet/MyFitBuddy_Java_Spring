@@ -23,6 +23,11 @@ public interface FitSetController {
     @PathVariable("recordId") final long recordId
   );
 
+  @GetMapping(value = "/exercise/{exerciseId}", produces = "application/json")
+  ResponseEntity<List<FitSet>> getSetsByExerciseId(
+    @PathVariable("exerciseId") final long exerciseId
+  );
+
   @PostMapping(value = "/create", produces = "application/json")
   ResponseEntity<FitSet> addSetToSession(@RequestBody final FitSetCreateForm form);
 

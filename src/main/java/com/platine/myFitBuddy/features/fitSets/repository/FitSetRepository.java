@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FitSetRepository extends JpaRepository<FitSet, Long> {
   List<FitSet> findAllByRecordUser(DBUser user);
+  List<FitSet> findAllByRecordIdAndRecordUser(Long recordId, DBUser user);
+  List<FitSet> findAllByExerciseIdAndRecordUser(Long exerciseId, DBUser user);
 }
