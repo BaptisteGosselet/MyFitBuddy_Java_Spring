@@ -14,6 +14,8 @@ public interface SessionContentRepository extends JpaRepository<SessionContent, 
 
   void deleteByIdAndUser(Long id, DBUser user);
 
-  @Query("SELECT MAX(s.index) FROM SessionContent s WHERE s.sessionId = :sessionId")
+  @Query(
+    "SELECT COALESCE(MAX(s.index), 0) FROM SessionContent s WHERE s.sessionId = :sessionId"
+  )
   int findMaxIndexBySessionId(@Param("sessionId") Long sessionId);
 }
