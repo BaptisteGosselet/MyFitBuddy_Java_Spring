@@ -15,6 +15,7 @@ import com.platine.myFitBuddy.features.sessionContent.repository.SessionContentR
 import com.platine.myFitBuddy.features.sessions.model.FitSession;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import com.platine.myFitBuddy.utils.ExercisesFactory;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -175,7 +176,9 @@ public class LoadingDatabase implements CommandLineRunner {
       )
     );
 
-    FitRecord recordA = fitRecordRepository.save(new FitRecord("Record A", dbuser));
+    FitRecord recordToCreateA = new FitRecord("Record A", dbuser);
+    recordToCreateA.setDate(LocalDate.now().minusDays(1));
+    FitRecord recordA = fitRecordRepository.save(recordToCreateA);
 
     fitSetRepository.save(new FitSet(recordA, savedExercises.get(0), 1, 6, 55));
     fitSetRepository.save(new FitSet(recordA, savedExercises.get(0), 2, 8, 50));

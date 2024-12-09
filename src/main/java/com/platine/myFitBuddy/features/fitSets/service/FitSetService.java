@@ -14,7 +14,13 @@ public interface FitSetService {
 
   List<FitSet> getSetsbyRecordId(final long recordId, final DBUser user);
 
-  List<FitSet> getSetsbyExerciseId(final long exerciceId, final DBUser user);
+  List<FitSet> getSetsbyExerciseId(final long exerciseId, final DBUser user);
+
+  List<FitSet> getSetsbyExerciseIdAndNbOrder(
+    final long exerciseId,
+    final int nbOrder,
+    final DBUser user
+  );
 
   FitSet addSetToSession(final FitSetCreateForm form, final DBUser user);
 

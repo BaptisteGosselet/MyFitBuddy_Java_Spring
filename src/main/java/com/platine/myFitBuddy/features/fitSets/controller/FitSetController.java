@@ -23,9 +23,18 @@ public interface FitSetController {
     @PathVariable("recordId") final long recordId
   );
 
-  @GetMapping(value = "/exercise/{exerciseId}", produces = "application/json")
+  @GetMapping(value = "/exerciseSet/{exerciseId}", produces = "application/json")
   ResponseEntity<List<FitSet>> getSetsByExerciseId(
     @PathVariable("exerciseId") final long exerciseId
+  );
+
+  @GetMapping(
+    value = "/exerciseSet/{exerciseId}/{nbOrder}",
+    produces = "application/json"
+  )
+  ResponseEntity<List<FitSet>> getSetsByExerciseIdAndNbOrder(
+    @PathVariable("exerciseId") final long exerciseId,
+    @PathVariable("nbOrder") final int nbOrder
   );
 
   @PostMapping(value = "/create", produces = "application/json")

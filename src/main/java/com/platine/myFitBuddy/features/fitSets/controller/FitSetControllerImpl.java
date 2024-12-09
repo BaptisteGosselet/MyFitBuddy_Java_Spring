@@ -56,6 +56,24 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
+  public ResponseEntity<List<FitSet>> getSetsByExerciseIdAndNbOrder(
+    @PathVariable("exerciseId") final long exerciseId,
+    @PathVariable("nbOrder") final int nbOrder
+  ) {
+    DBUser user = dbUserService.getCurrentUser();
+
+    List<FitSet> fitSets = fitSetService.getSetsbyExerciseIdAndNbOrder(
+      exerciseId,
+      nbOrder,
+      user
+    );
+    if (fitSets.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+    return ResponseEntity.ok(fitSets);
+  }
+
+  @Override
   public ResponseEntity<FitSet> addSetToSession(
     @RequestBody final FitSetCreateForm form
   ) {
