@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,6 +30,11 @@ public class FitSetServiceImpl implements FitSetService {
   @Autowired
   private final ExerciseRepository exerciseRepository;
 
+  private final Sort SORT = Sort.by(
+    Sort.Order.desc("record.date"),
+    Sort.Order.asc("nbOrder")
+  );
+
   @Override
   public Optional<FitSet> getSetById(final long setId, final DBUser user) {
     return fitSetRepository
@@ -38,17 +44,31 @@ public class FitSetServiceImpl implements FitSetService {
 
   @Override
   public List<FitSet> getSetsbyUser(final DBUser user) {
-    return fitSetRepository.findAllByRecordUser(user);
+    return fitSetRepository.findAllByRecordUser(user, SORT);
   }
 
   @Override
   public List<FitSet> getSetsbyRecordId(final long recordId, final DBUser user) {
-    return fitSetRepository.findAllByRecordIdAndRecordUser(recordId, user);
+    return fitSetRepository.findAllByRecordIdAndRecordUser(recordId, user, SORT);
   }
 
   @Override
   public List<FitSet> getSetsbyExerciseId(final long exerciseId, final DBUser user) {
-    return fitSetRepository.findAllByExerciseIdAndRecordUser(exerciseId, user);
+    return fitSetRepository.findAllByExerciseIdAndRecordUser(exerciseId, user, SORT);
+  }
+
+  @Override
+  public List<FitSet> getSetsbyExerciseIdAndNbOrder(
+    final long exerciseId,
+    final int nbOrder,
+    final DBUser user
+  ) {
+    return fitSetRepository.findAllByExerciseIdAndNbOrderAndRecordUser(
+      exerciseId,
+      nbOrder,
+      user,
+      SORT
+    );
   }
 
   @Override

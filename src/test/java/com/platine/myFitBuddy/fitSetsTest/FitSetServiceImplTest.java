@@ -78,11 +78,11 @@ public class FitSetServiceImplTest {
       )
     );
 
-    when(fitSetRepository.findAllByRecordUser(any())).thenReturn(fitSetsExpected);
+    when(fitSetRepository.findAllByRecordUser(any(), any())).thenReturn(fitSetsExpected);
 
     List<FitSet> fitsSetsFromService = fitSetServiceImpl.getSetsbyUser(user);
 
-    verify(fitSetRepository, times(1)).findAllByRecordUser(any());
+    verify(fitSetRepository, times(1)).findAllByRecordUser(any(), any());
     for (int i = 0; i < fitSetsExpected.size(); i++) {
       assertEquals(fitSetsExpected.get(i).getId(), fitsSetsFromService.get(i).getId());
       assertEquals(
