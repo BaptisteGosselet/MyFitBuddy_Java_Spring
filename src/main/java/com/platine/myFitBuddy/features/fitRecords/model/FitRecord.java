@@ -11,7 +11,7 @@ import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -32,7 +32,7 @@ public class FitRecord {
   private long id;
 
   @NotNull
-  private LocalDate date;
+  private LocalDateTime date;
 
   @NotBlank
   private String name;
@@ -47,7 +47,7 @@ public class FitRecord {
   @PrePersist
   protected void onCreate() {
     if (this.date == null) {
-      this.date = LocalDate.now();
+      this.date = LocalDateTime.now();
     }
   }
 }
