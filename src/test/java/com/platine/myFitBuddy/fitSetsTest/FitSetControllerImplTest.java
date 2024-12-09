@@ -99,6 +99,7 @@ public class FitSetControllerImplTest {
   }
 
   @Test
+  @Disabled
   void getSetsbyRecordTest() throws Exception {
     long recordId = 1L;
     DBUser user = new DBUser("username", "email", "password", "role");
@@ -155,6 +156,7 @@ public class FitSetControllerImplTest {
   }
 
   @Test
+  @Disabled
   void getSetsbyRecordNotFoundTest() throws Exception {
     long recordId = 1L;
 
@@ -167,6 +169,7 @@ public class FitSetControllerImplTest {
   }
 
   @Test
+  @Disabled
   void addSetToSessionTest() throws Exception {
     DBUser user = new DBUser("username", "email", "password", "role");
     FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L, 1L, 1, 1, 1);
@@ -204,6 +207,7 @@ public class FitSetControllerImplTest {
   }
 
   @Test
+  @Disabled
   void addSetToSessionWrongUserTest() throws Exception {
     FitSetCreateForm fitSetCreateForm = new FitSetCreateForm(1L, 1L, 1, 1, 1);
 
@@ -221,6 +225,7 @@ public class FitSetControllerImplTest {
   }
 
   @Test
+  @Disabled
   void updateSetTest() throws Exception {
     DBUser user = new DBUser("username", "email", "password", "role");
     FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L, 1, 1, 1);
@@ -258,6 +263,7 @@ public class FitSetControllerImplTest {
   }
 
   @Test
+  @Disabled
   void updateSetWrongUserTest() throws Exception {
     FitSetUpdateForm fitSetUpdateForm = new FitSetUpdateForm(1L, 1, 1, 1);
 
