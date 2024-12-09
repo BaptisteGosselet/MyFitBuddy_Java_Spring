@@ -65,11 +65,11 @@ public class FitRecordServiceImplTest {
       new FitRecord("name2", user)
     );
 
-    when(fitRecordRepository.findByUser(any())).thenReturn(fitRecordsExpected);
+    when(fitRecordRepository.findByUser(any(), any())).thenReturn(fitRecordsExpected);
 
     List<FitRecord> fitRecordFromService = fitRecordServiceImpl.getRecordsOfUser(user);
 
-    verify(fitRecordRepository).findByUser(any());
+    verify(fitRecordRepository).findByUser(any(), any());
     for (int i = 0; i < fitRecordsExpected.size(); i++) {
       assertEquals(
         fitRecordsExpected.get(i).getName(),
