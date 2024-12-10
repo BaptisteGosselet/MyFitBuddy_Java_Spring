@@ -16,7 +16,10 @@ public interface FitSetService {
 
   List<FitSet> getSetsbyRecordId(final long recordId, final DBUser user);
 
-  Map<String,List<FitSet>> getSetsbyRecordIdSortByExercice(final long recordId, final DBUser user);
+  Map<String, List<FitSet>> getSetsbyRecordIdSortByExercice(
+    final long recordId,
+    final DBUser user
+  );
 
   List<FitSet> getSetsbyExerciseId(final long exerciseId, final DBUser user);
 
@@ -31,5 +34,4 @@ public interface FitSetService {
   FitSet updateSet(final FitSetUpdateForm form, final DBUser user);
 
   void deleteSet(final long idSet, final DBUser user);
-
 }

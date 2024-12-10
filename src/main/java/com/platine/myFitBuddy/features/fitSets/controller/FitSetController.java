@@ -6,7 +6,6 @@ import com.platine.myFitBuddy.features.fitSets.model.FitSetCreateForm;
 import com.platine.myFitBuddy.features.fitSets.model.FitSetUpdateForm;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +26,8 @@ public interface FitSetController {
   );
 
   @GetMapping(value = "/recordByExo/{recordId}", produces = "application/json")
-  ResponseEntity<Map<String,List<FitSet>>> getSetsbyRecordIdSortByExercice(
-          @PathVariable("recordId") long recordId
+  ResponseEntity<Map<String, List<FitSet>>> getSetsbyRecordIdSortByExercice(
+    @PathVariable("recordId") long recordId
   );
 
   @GetMapping(value = "/exerciseSet/{exerciseId}", produces = "application/json")

@@ -9,7 +9,6 @@ import com.platine.myFitBuddy.features.fitSets.model.FitSetUpdateForm;
 import com.platine.myFitBuddy.features.fitSets.service.FitSetServiceImpl;
 import java.util.List;
 import java.util.Map;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,12 +45,15 @@ public class FitSetControllerImpl implements FitSetController {
   }
 
   @Override
-  public ResponseEntity<Map<String,List<FitSet>>> getSetsbyRecordIdSortByExercice(
-          @PathVariable("recordId") long recordId
+  public ResponseEntity<Map<String, List<FitSet>>> getSetsbyRecordIdSortByExercice(
+    @PathVariable("recordId") long recordId
   ) {
     DBUser user = dbUserService.getCurrentUser();
 
-    Map<String,List<FitSet>> fitSets = fitSetService.getSetsbyRecordIdSortByExercice(recordId, user);
+    Map<String, List<FitSet>> fitSets = fitSetService.getSetsbyRecordIdSortByExercice(
+      recordId,
+      user
+    );
     if (fitSets.isEmpty()) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
@@ -65,9 +67,6 @@ public class FitSetControllerImpl implements FitSetController {
     DBUser user = dbUserService.getCurrentUser();
 
     List<FitSet> fitSets = fitSetService.getSetsbyExerciseId(exerciseId, user);
-    if (fitSets.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
     return ResponseEntity.ok(fitSets);
   }
 
@@ -83,9 +82,6 @@ public class FitSetControllerImpl implements FitSetController {
       nbOrder,
       user
     );
-    if (fitSets.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
     return ResponseEntity.ok(fitSets);
   }
 
