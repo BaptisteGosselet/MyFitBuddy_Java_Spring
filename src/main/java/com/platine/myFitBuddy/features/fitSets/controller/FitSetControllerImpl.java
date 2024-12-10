@@ -49,9 +49,6 @@ public class FitSetControllerImpl implements FitSetController {
     DBUser user = dbUserService.getCurrentUser();
 
     List<FitSet> fitSets = fitSetService.getSetsbyExerciseId(exerciseId, user);
-    if (fitSets.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
     return ResponseEntity.ok(fitSets);
   }
 
@@ -67,9 +64,6 @@ public class FitSetControllerImpl implements FitSetController {
       nbOrder,
       user
     );
-    if (fitSets.isEmpty()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    }
     return ResponseEntity.ok(fitSets);
   }
 
