@@ -19,7 +19,6 @@ public class SessionContentServiceImpl implements SessionContentService {
   @Autowired
   private final SessionContentRepository sessionContentRepository;
 
-
   @Override
   public SessionContent findById(long sessionId) {
     return sessionContentRepository.findById(sessionId).orElse(null);
@@ -48,7 +47,11 @@ public class SessionContentServiceImpl implements SessionContentService {
   ) {
     updateForm.setId(sessionContentId);
     return sessionContentRepository.save(
-      SessionContentMapper.mapFromUpdateForm(updateForm, this.findById(sessionContentId) ,user)
+      SessionContentMapper.mapFromUpdateForm(
+        updateForm,
+        this.findById(sessionContentId),
+        user
+      )
     );
   }
 

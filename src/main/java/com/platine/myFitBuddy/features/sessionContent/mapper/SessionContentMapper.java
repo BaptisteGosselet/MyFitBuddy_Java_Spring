@@ -27,10 +27,12 @@ public class SessionContentMapper {
   }
 
   public static SessionContent mapFromUpdateForm(
-          final SessionContentUpdateForm sessionContentUpdateForm,
-          SessionContent sessionInDB, final DBUser user
-  ) throws AccessDeniedException {
-    if(user.getId() != sessionInDB.getUser().getId()) {
+    final SessionContentUpdateForm sessionContentUpdateForm,
+    SessionContent sessionInDB,
+    final DBUser user
+  )
+    throws AccessDeniedException {
+    if (user.getId() != sessionInDB.getUser().getId()) {
       throw new AccessDeniedException("Access denied");
     }
     sessionInDB.setNumberOfSet(sessionContentUpdateForm.getNumberOfSet());

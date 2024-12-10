@@ -7,7 +7,6 @@ import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdate
 import java.util.List;
 
 public interface SessionContentService {
-
   SessionContent findById(long sessionId);
 
   List<SessionContent> findByUserIdBySession(final Long sessionId, final DBUser user);
