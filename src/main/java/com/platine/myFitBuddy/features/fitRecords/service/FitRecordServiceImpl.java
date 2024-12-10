@@ -2,6 +2,7 @@ package com.platine.myFitBuddy.features.fitRecords.service;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
+import com.platine.myFitBuddy.features.fitRecords.model.FitRecordNoteForm;
 import com.platine.myFitBuddy.features.fitRecords.repository.FitRecordRepository;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import jakarta.transaction.Transactional;
@@ -51,7 +52,11 @@ public class FitRecordServiceImpl implements FitRecordService {
   }
 
   @Override
-  public FitRecord setFeelingNote(long recordId, String note, DBUser user) {
+  public FitRecord setFeelingNote(
+    final long recordId,
+    final FitRecordNoteForm form,
+    final DBUser user
+  ) {
     FitRecord record = recordRepository
       .findById(recordId)
       .filter(r -> r.getUser().equals(user))
@@ -59,7 +64,13 @@ public class FitRecordServiceImpl implements FitRecordService {
         () -> new IllegalArgumentException("Enregistrement non trouvé ou non autorisé.")
       );
 
-    record.setFeelingNote(note);
+    if (form.getText().length() > 0) {
+      record.setFeelingNote(form.getText());
+    }
+    if (form.getRate() != null) {
+      record.setFeelingRate(form.getRate());
+    }
+
     return recordRepository.save(record);
   }
 

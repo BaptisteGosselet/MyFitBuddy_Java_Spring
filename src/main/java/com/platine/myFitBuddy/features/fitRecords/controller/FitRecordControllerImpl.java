@@ -3,6 +3,7 @@ package com.platine.myFitBuddy.features.fitRecords.controller;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
+import com.platine.myFitBuddy.features.fitRecords.model.FitRecordNoteForm;
 import com.platine.myFitBuddy.features.fitRecords.service.FitRecordServiceImpl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -42,11 +43,11 @@ public class FitRecordControllerImpl implements FitRecordController {
 
   @Override
   public ResponseEntity<FitRecord> setFeelingNote(
-    @RequestParam long sessionId,
-    final String note
+    final long recordId,
+    final FitRecordNoteForm form
   ) {
     DBUser currentUser = dbUserService.getCurrentUser();
-    FitRecord newRecord = recordService.setFeelingNote(sessionId, note, currentUser);
+    FitRecord newRecord = recordService.setFeelingNote(recordId, form, currentUser);
     return ResponseEntity.ok(newRecord);
   }
 
