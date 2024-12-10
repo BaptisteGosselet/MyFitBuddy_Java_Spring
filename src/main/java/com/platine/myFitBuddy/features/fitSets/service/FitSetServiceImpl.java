@@ -10,9 +10,7 @@ import com.platine.myFitBuddy.features.fitSets.model.FitSetCreateForm;
 import com.platine.myFitBuddy.features.fitSets.model.FitSetUpdateForm;
 import com.platine.myFitBuddy.features.fitSets.repository.FitSetRepository;
 import jakarta.transaction.Transactional;
-
 import java.util.*;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -54,14 +52,21 @@ public class FitSetServiceImpl implements FitSetService {
   }
 
   @Override
-  public Map<String,List<FitSet>> getSetsbyRecordIdSortByExercice(final long recordId, final DBUser user) {
-    List<FitSet> fitSets = fitSetRepository.findAllByRecordIdAndRecordUser(recordId, user, SORT);
-    Map<String,List<FitSet>> fitSetSortByExercise = new HashMap<>();
+  public Map<String, List<FitSet>> getSetsbyRecordIdSortByExercice(
+    final long recordId,
+    final DBUser user
+  ) {
+    List<FitSet> fitSets = fitSetRepository.findAllByRecordIdAndRecordUser(
+      recordId,
+      user,
+      SORT
+    );
+    Map<String, List<FitSet>> fitSetSortByExercise = new HashMap<>();
 
-    for(FitSet fitSet : fitSets) {
-      if(fitSetSortByExercise.containsKey(fitSet.getExercise().getLabelFr())) {
+    for (FitSet fitSet : fitSets) {
+      if (fitSetSortByExercise.containsKey(fitSet.getExercise().getLabelFr())) {
         fitSetSortByExercise.get(fitSet.getExercise().getLabelFr()).add(fitSet);
-      }else{
+      } else {
         fitSetSortByExercise.put(fitSet.getExercise().getLabelFr(), new ArrayList<>());
       }
     }
