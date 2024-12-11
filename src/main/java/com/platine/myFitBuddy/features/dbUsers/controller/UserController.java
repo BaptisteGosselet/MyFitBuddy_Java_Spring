@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/users")
 public interface UserController {
-  // Consultation des informations de l'utilisateur
   @GetMapping("/me")
   public ResponseEntity<DBUser> getCurrentUser();
 
@@ -17,7 +16,9 @@ public interface UserController {
   @GetMapping("/me/email")
   public ResponseEntity<String> getCurrentEmail();
 
-  // Consultation les informations de tous les utilisateurs
+  @DeleteMapping("/me/delete")
+  public ResponseEntity<Boolean> deleteUser();
+
   @GetMapping("/all")
   public ResponseEntity<List<DBUser>> getAllUsers();
 }

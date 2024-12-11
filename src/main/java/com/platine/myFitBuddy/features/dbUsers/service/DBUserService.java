@@ -7,4 +7,6 @@ public interface DBUserService {
   public DBUser getCurrentUser();
 
   public List<DBUser> getAllUsers();
+
+  public boolean deleteuser();
 }
