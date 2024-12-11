@@ -28,4 +28,14 @@ public class DBUserServiceImpl implements DBUserService {
     DBUser currentUser = (DBUser) authentication.getPrincipal();
     return dbUserRepository.findByUsername(currentUser.getUsername()).get();
   }
+
+  @Override
+  public boolean deleteuser() {
+    final DBUser userToDelete = getCurrentUser();
+    if(userToDelete != null){
+      dbUserRepository.delete(userToDelete);
+      return true;
+    }
+    return false;
+  }
 }

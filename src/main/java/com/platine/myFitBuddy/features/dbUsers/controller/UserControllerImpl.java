@@ -35,4 +35,9 @@ public class UserControllerImpl implements UserController {
     final DBUser user = dbUserServiceImpl.getCurrentUser();
     return ResponseEntity.ok(user.getEmail());
   }
+
+  @Override
+  public ResponseEntity<Boolean> deleteUser(){
+    return ResponseEntity.ok(dbUserServiceImpl.deleteuser());
+  }
 }
