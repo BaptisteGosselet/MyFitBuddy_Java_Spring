@@ -23,4 +23,16 @@ public class UserControllerImpl implements UserController {
   public ResponseEntity<List<DBUser>> getAllUsers() {
     return ResponseEntity.ok(dbUserServiceImpl.getAllUsers());
   }
+
+  @Override
+  public ResponseEntity<String> getCurrentUsername() {
+    final DBUser user = dbUserServiceImpl.getCurrentUser();
+    return ResponseEntity.ok(user.getUsername());
+  }
+
+  @Override
+  public ResponseEntity<String> getCurrentEmail() {
+    final DBUser user = dbUserServiceImpl.getCurrentUser();
+    return ResponseEntity.ok(user.getEmail());
+  }
 }
