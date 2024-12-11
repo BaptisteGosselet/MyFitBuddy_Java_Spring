@@ -2,7 +2,6 @@ package com.platine.myFitBuddy.features.fitSets.controller;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
-import com.platine.myFitBuddy.features.exercices.model.Exercise;
 import com.platine.myFitBuddy.features.fitSets.model.FitSet;
 import com.platine.myFitBuddy.features.fitSets.model.FitSetCreateForm;
 import com.platine.myFitBuddy.features.fitSets.model.FitSetUpdateForm;
