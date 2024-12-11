@@ -11,6 +11,12 @@ public interface UserController {
   @GetMapping("/me")
   public ResponseEntity<DBUser> getCurrentUser();
 
+  @GetMapping("/me/username")
+  public ResponseEntity<String> getCurrentUsername();
+
+  @GetMapping("/me/email")
+  public ResponseEntity<String> getCurrentEmail();
+
   // Consultation les informations de tous les utilisateurs
   @GetMapping("/all")
   public ResponseEntity<List<DBUser>> getAllUsers();
