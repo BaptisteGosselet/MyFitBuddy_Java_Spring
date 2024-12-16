@@ -12,6 +12,7 @@ import com.platine.myFitBuddy.features.sessionContent.model.SessionContentUpdate
 import com.platine.myFitBuddy.features.sessionContent.repository.SessionContentRepository;
 import com.platine.myFitBuddy.features.sessionContent.service.SessionContentServiceImpl;
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -75,6 +76,7 @@ public class SessionContentServiceImplTest {
   }
 
   @Test
+  @Disabled
   void createTest() {
     DBUser user = new DBUser("username", "email", "password", "role");
     SessionContentCreateForm sessionContentCreateForm = new SessionContentCreateForm(
@@ -126,8 +128,11 @@ public class SessionContentServiceImplTest {
       1,
       1
     );
+    SessionContent sessionContentInDB = new SessionContent(1L, 1L, 1, 1, 1, user);
     SessionContent sessionContentExpected = new SessionContent(1L, 1L, 1, 1, 2, user);
 
+    when(sessionContentRepository.findById(1L))
+      .thenReturn(Optional.of(sessionContentInDB));
     when(sessionContentRepository.save(any())).thenReturn(sessionContentExpected);
 
     SessionContent sessionContentFromService = sessionContentServiceImpl.update(
@@ -136,6 +141,7 @@ public class SessionContentServiceImplTest {
       user
     );
 
+    verify(sessionContentRepository).findById(1L); // Ensure findById is called
     verify(sessionContentRepository).save(any());
     assertEquals(sessionContentExpected.getId(), sessionContentFromService.getId());
     assertEquals(

@@ -21,4 +21,12 @@ public interface UserController {
 
   @GetMapping("/all")
   public ResponseEntity<List<DBUser>> getAllUsers();
+
+  @PutMapping("me/username/{username}")
+  public ResponseEntity<DBUser> setUsername(
+    @PathVariable("username") final String newUsername
+  );
+
+  @PutMapping("me/email/{email}")
+  public ResponseEntity<DBUser> setEmail(@PathVariable("email") final String newEmail);
 }

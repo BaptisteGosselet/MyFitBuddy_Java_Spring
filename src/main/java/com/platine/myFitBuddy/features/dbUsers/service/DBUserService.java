@@ -9,4 +9,8 @@ public interface DBUserService {
   public List<DBUser> getAllUsers();
 
   public boolean deleteuser();
+
+  public DBUser setUsername(final String newUsername);
+
+  public DBUser setEmail(final String email);
 }
