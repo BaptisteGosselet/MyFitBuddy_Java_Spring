@@ -1,6 +1,7 @@
 package com.platine.myFitBuddy.features.dbUsers.controller;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
+import com.platine.myFitBuddy.features.dbUsers.model.DBUserEditForm;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUserRegisterForm;
 import com.platine.myFitBuddy.features.dbUsers.service.DBUserServiceImpl;
 import java.util.List;
@@ -42,12 +43,7 @@ public class UserControllerImpl implements UserController {
   }
 
   @Override
-  public ResponseEntity<DBUser> setUsername(String newUsername) {
-    return ResponseEntity.ok(dbUserServiceImpl.setUsername(newUsername));
-  }
-
-  @Override
-  public ResponseEntity<DBUser> setEmail(String newEmail) {
-    return ResponseEntity.ok(dbUserServiceImpl.setEmail(newEmail));
+  public ResponseEntity<DBUser> editUser(final DBUserEditForm form) {
+    return ResponseEntity.ok(dbUserServiceImpl.editUser(form));
   }
 }

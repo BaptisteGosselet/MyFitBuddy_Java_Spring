@@ -1,6 +1,7 @@
 package com.platine.myFitBuddy.features.dbUsers.service;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
+import com.platine.myFitBuddy.features.dbUsers.model.DBUserEditForm;
 import java.util.List;
 
 public interface DBUserService {
@@ -10,7 +11,5 @@ public interface DBUserService {
 
   public boolean deleteuser();
 
-  public DBUser setUsername(final String newUsername);
-
-  public DBUser setEmail(final String email);
+  public DBUser editUser(final DBUserEditForm form);
 }

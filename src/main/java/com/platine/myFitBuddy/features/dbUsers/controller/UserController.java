@@ -1,6 +1,7 @@
 package com.platine.myFitBuddy.features.dbUsers.controller;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
+import com.platine.myFitBuddy.features.dbUsers.model.DBUserEditForm;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +23,6 @@ public interface UserController {
   @GetMapping("/all")
   public ResponseEntity<List<DBUser>> getAllUsers();
 
-  @PutMapping("me/username/{username}")
-  public ResponseEntity<DBUser> setUsername(
-    @PathVariable("username") final String newUsername
-  );
-
-  @PutMapping("me/email/{email}")
-  public ResponseEntity<DBUser> setEmail(@PathVariable("email") final String newEmail);
+  @PutMapping("me/edit")
+  public ResponseEntity<DBUser> editUser(@RequestBody final DBUserEditForm form);
 }
