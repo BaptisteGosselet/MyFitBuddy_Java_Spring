@@ -67,7 +67,8 @@ public class FitSetServiceImpl implements FitSetService {
       if (fitSetSortByExercise.containsKey(fitSet.getExercise().getLabelFr())) {
         fitSetSortByExercise.get(fitSet.getExercise().getLabelFr()).add(fitSet);
       } else {
-        fitSetSortByExercise.put(fitSet.getExercise().getLabelFr(), List.of(fitSet));
+        fitSetSortByExercise.put(fitSet.getExercise().getLabelFr(), new ArrayList<>());
+        fitSetSortByExercise.get(fitSet.getExercise().getLabelFr()).add(fitSet);
       }
     }
 
