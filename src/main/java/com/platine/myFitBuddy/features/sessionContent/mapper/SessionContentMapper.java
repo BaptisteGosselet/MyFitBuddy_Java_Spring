@@ -43,6 +43,7 @@ public class SessionContentMapper {
 
   public static SessionContentDTO mapToDTO(final SessionContent sessionContent) {
     SessionContentDTO sessionContentDTO = new SessionContentDTO();
+    sessionContentDTO.setId(sessionContent.getId());
     sessionContentDTO.setSessionId(sessionContent.getSessionId());
     sessionContentDTO.setExerciseId(sessionContent.getExerciseId());
     sessionContentDTO.setNumberOfSet(sessionContent.getNumberOfSet());
