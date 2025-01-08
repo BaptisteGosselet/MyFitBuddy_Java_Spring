@@ -43,10 +43,6 @@ public class FitRecord {
   @Size(max = 255, message = "Feeling note can't exceed 255 chars.")
   private String feelingNote;
 
-  @Max(value = 4)
-  @Min(value = 0)
-  private int feelingRate;
-
   @PrePersist
   protected void onCreate() {
     if (this.date == null) {

@@ -11,5 +11,4 @@ import lombok.Setter;
 @AllArgsConstructor
 public class FitRecordNoteForm {
   private String text;
-  private Integer rate;
 }
