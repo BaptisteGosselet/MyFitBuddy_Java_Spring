@@ -67,9 +67,6 @@ public class FitRecordServiceImpl implements FitRecordService {
     if (form.getText().length() > 0) {
       record.setFeelingNote(form.getText());
     }
-    if (form.getRate() != null) {
-      record.setFeelingRate(form.getRate());
-    }
 
     return recordRepository.save(record);
   }
