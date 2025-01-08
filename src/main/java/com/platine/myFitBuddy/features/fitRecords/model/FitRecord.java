@@ -2,12 +2,12 @@ package com.platine.myFitBuddy.features.fitRecords.model;
 
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +19,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @NoArgsConstructor
 public class FitRecord {
+  ZoneId parisZone = ZoneId.of("Europe/Paris");
 
   public FitRecord(String name, DBUser user) {
     this.name = name;
@@ -46,7 +47,7 @@ public class FitRecord {
   @PrePersist
   protected void onCreate() {
     if (this.date == null) {
-      this.date = LocalDateTime.now();
+      this.date = LocalDateTime.now(parisZone);
     }
   }
 }
