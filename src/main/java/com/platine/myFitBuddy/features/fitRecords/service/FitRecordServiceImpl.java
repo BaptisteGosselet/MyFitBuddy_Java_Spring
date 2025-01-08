@@ -4,6 +4,7 @@ import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecordNoteForm;
 import com.platine.myFitBuddy.features.fitRecords.repository.FitRecordRepository;
+import com.platine.myFitBuddy.features.sessions.model.FitSession;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -41,7 +42,7 @@ public class FitRecordServiceImpl implements FitRecordService {
   public FitRecord createRecord(long sessionId, DBUser user) {
     String sessionName = sessionRepository
       .findById(sessionId)
-      .map(session -> session.getName())
+      .map(FitSession::getName)
       .orElseThrow(() -> new IllegalArgumentException("Session non trouvée"));
 
     FitRecord newRecord = new FitRecord();
@@ -63,11 +64,7 @@ public class FitRecordServiceImpl implements FitRecordService {
       .orElseThrow(
         () -> new IllegalArgumentException("Enregistrement non trouvé ou non autorisé.")
       );
-
-    if (form.getText().length() > 0) {
-      record.setFeelingNote(form.getText());
-    }
-
+    record.setFeelingNote(form.getText());
     return recordRepository.save(record);
   }
 

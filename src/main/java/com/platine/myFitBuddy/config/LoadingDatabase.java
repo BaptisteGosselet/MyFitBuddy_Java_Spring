@@ -1,10 +1,8 @@
 package com.platine.myFitBuddy.config;
 
-import com.github.javafaker.Faker;
 import com.platine.myFitBuddy.features.dbUsers.model.DBUser;
 import com.platine.myFitBuddy.features.dbUsers.repository.DBUserRepository;
 import com.platine.myFitBuddy.features.exercices.model.Exercise;
-import com.platine.myFitBuddy.features.exercices.model.MuscleGroup;
 import com.platine.myFitBuddy.features.exercices.repository.ExerciseRepository;
 import com.platine.myFitBuddy.features.fitRecords.model.FitRecord;
 import com.platine.myFitBuddy.features.fitRecords.repository.FitRecordRepository;
@@ -15,20 +13,21 @@ import com.platine.myFitBuddy.features.sessionContent.repository.SessionContentR
 import com.platine.myFitBuddy.features.sessions.model.FitSession;
 import com.platine.myFitBuddy.features.sessions.repository.SessionRepository;
 import com.platine.myFitBuddy.utils.ExercisesFactory;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
 public class LoadingDatabase implements CommandLineRunner {
+  ZoneId parisZone = ZoneId.of("Europe/Paris");
+
   @Autowired
   private DBUserRepository dbUserRepository;
 
@@ -178,10 +177,10 @@ public class LoadingDatabase implements CommandLineRunner {
     );
 
     FitRecord recordToCreateA = new FitRecord("Record A", dbuser);
-    recordToCreateA.setDate(LocalDateTime.now().minusDays(1));
+    recordToCreateA.setDate(LocalDateTime.now(parisZone).minusDays(1));
     FitRecord recordA = fitRecordRepository.save(recordToCreateA);
 
-    fitSetRepository.save(new FitSet(recordA, savedExercises.get(0), 1, 6, 55));
+    fitSetRepository.save(new FitSet(recordA, savedExercises.getFirst(), 1, 6, 55));
     fitSetRepository.save(new FitSet(recordA, savedExercises.get(0), 2, 8, 50));
     fitSetRepository.save(new FitSet(recordA, savedExercises.get(0), 3, 10, 45));
 
